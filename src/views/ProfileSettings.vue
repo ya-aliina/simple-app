@@ -19,14 +19,12 @@
 				<div class=" wrapper-radio d-flex px-10 ">
 					<div class="col-2">Очень важный вопрос</div>
 					<div class=" col-8 radio">
-						<MyRadio v-model="picked" value="Да" label="Да"/>
-						<MyRadio v-model="picked" value="Нет" label="Нет"/>
+						<my-radio :options="radioOptions" v-model:selected="answer" />
 					</div>
+					<div>{{answer}}</div>
 				</div>
 
-
-				<div>Выбрано: {{ picked }}</div>
-				<MyTextarea label="О себе" v-model="about" rows="8"/>
+<!--				<MyTextarea label="О себе" v-model="about" rows="8"/>-->
 				<MyButton label="Сохранить" type="submit"/>
 			</div>
 		</div>
@@ -60,7 +58,16 @@ export default {
 			picked: null,
 			about: '',
 			email: '',
+			answer: '',
+			radioOptions: [
+				'Да',
+				'Нет',
+				'Не знаю',
+			]
 		}
+	},
+	methods: {
+
 	}
 
 }

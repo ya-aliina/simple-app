@@ -24,7 +24,6 @@
 		},
 		watch: {
 			$route () {
-				console.log('route changed',  this.$route);
 				this.activePath = this.$route.path;
 			}
 		},

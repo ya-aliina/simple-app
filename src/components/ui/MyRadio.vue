@@ -1,10 +1,19 @@
 <template>
-	<div class="form-check">
-		<input class="form-check-input" type="radio" name="exampleRadios" id="my_radio" :value="value" v-model="inputValue" />
-		<label class="form-check-label" for="my_radio">
-			{{label}}
-		</label>
+	<div>
+		<div class="form-check">
+			<div
+				v-for="item in options"
+				:key="item"
+			>
+				<input class="form-check-input" type="radio" name="flexRadioDefault" :id="item" :value="item" v-model="picked">
+				<label class="form-check-label" :for="item">
+					{{ item }}
+				</label>
+			</div>
+		</div>
 	</div>
+
+
 </template>
 
 <script>
@@ -12,30 +21,26 @@ export default {
 	name: "MyRadio",
 	data () {
 		return {
-			inputValue: '',
-		};
+			picked: '',
+		}
+
 	},
 	props: {
-		modelValue: {
-			type: String,
-			default: null,
+		options: {
+			type: Array,
 		},
-		label: {
+		selected: {
 			type: String,
-			default: null,
-		},
-		value: {
-			type: String,
-			default: null,
-		},
+		}
+
 	},
 	watch: {
-		modelValue () {
-			this.inputValue = this.modelValue;
+		picked () {
+			this.$emit('update:selected', this.picked)
 		},
-		inputValue () {
-			this.$emit('update:modelValue', this.inputValue);
-		},
+		selected () {
+			this.picked = this.selected;
+		}
 	},
 }
 
