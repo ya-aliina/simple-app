@@ -10,12 +10,12 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<MyInput label="Имя"  v-model="name"/>
-				<MyInput label="Фамилия"  v-model="surname"/>
-				<MyInput label="Логин"  v-model="login"/>
-				<MyInput label="Пароль"  v-model="password"/>
-				<MyInput label="email"  v-model="email"/>
-				<MyCheckbox v-model="checkbox1"  label="Получать уведомления на почту"/>
+				<my-input label="Имя"  v-model="name"/>
+				<my-input label="Фамилия"  v-model="surname"/>
+				<my-input label="Логин"  v-model="login"/>
+				<my-input label="Пароль"  v-model="password"/>
+				<my-input label="email"  v-model="email"/>
+				<my-checkbox v-model="checkbox1"  label="Получать уведомления на почту"/>
 				<div class=" wrapper-radio d-flex px-10 ">
 					<div class="col-2">Категория</div>
 					<div class=" col-8 radio">
@@ -32,7 +32,7 @@
 				</div>
 
 <!--				<MyTextarea label="О себе" v-model="about" rows="8"/>-->
-				<MyButton label="Сохранить" type="submit"  @click="showDialog"/>
+				<my-button label="Сохранить" type="submit"  @click="showDialog"/>
 				<my-dialog
 					ref="dialog"
 				/>
@@ -43,26 +43,12 @@
 </template>
 
 <script>
-import MyInput from "../components/ui/MyInput";
-import MyCheckbox from "../components/ui/MyCheckbox";
-// import MyRadio from "../components/ui/MyRadio";
-import MyTextarea from "../components/ui/MyTextarea";
-import MyButton from "../components/ui/MyButton";
-import MyDialog from "../components/ui/MyDialog";
 import Cover from "../components/Cover";
-import MySelect from "../components/ui/MySelect";
 
 export default {
 	name: "ProfileSettings",
 	components: {
 		Cover,
-		MyInput,
-		MyCheckbox,
-		// MyRadio,
-		MyTextarea,
-		MyButton,
-		MyDialog,
-		MySelect,
 	},
 	data() {
 		return {
