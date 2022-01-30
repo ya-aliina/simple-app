@@ -9,7 +9,7 @@
 
 <script>
 export default {
-	name: "MyCheckbox",
+	name: "my-checkbox",
 	data () {
 		return {
 			inputValue: '',

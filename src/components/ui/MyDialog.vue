@@ -38,7 +38,7 @@
 import MyButton from "./MyButton";
 
 export default {
-	name: "MyDialog",
+	name: "my-dialog",
 	data () {
 		return {
 			shown: false,

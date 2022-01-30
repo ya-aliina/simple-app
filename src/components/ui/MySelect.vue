@@ -12,7 +12,7 @@
 
 <script>
 export default {
-	name: "MySelect",
+	name: "my-select",
 	data () {
 		return {
 			picked: '',

@@ -8,7 +8,7 @@
 
 <script>
 export default {
-	name: "ButtonRound",
+	name: "button-round",
 	props: {
 		src: {
 			type: String,

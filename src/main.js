@@ -1,27 +1,20 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import components from '@/components/ui';
 
-import MyRadio from "@/components/ui/MyRadio"
-import MyButton from "@/components/ui/MyButton"
-import MyCheckbox from "@/components/ui/MyCheckbox"
-import MyDialog from "@/components/ui/MyDialog"
-import MyInput from "@/components/ui/MyInput"
-import MySelect from "@/components/ui/MySelect"
-import MyTextarea from "@/components/ui/MyTextarea"
+const app = createApp(App);
 
-createApp(App)
-	.use(router)
-	.use(store)
-	.component('MyRadio', MyRadio)
-	.component('MyButton', MyButton)
-	.component('MyCheckBox', MyCheckbox)
-	.component('MyDialog', MyDialog)
-	.component('MyInput', MyInput)
-	.component('MySelect', MySelect)
-	.component('MyTextarea', MyTextarea)
-	.mount('#app');
+app.use(router);
+app.use(store);
+
+components.forEach(component => {
+	app.component(component.name, component)
+});
+
+
+app.mount('#app');
 
 
 

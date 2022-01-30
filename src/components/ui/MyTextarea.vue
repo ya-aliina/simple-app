@@ -9,7 +9,7 @@
 <script>
 
 export default {
-	name: "MyTextarea",
+	name: "my-textarea",
 	data () {
 		return {
 			inputValue: '',

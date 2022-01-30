@@ -16,7 +16,7 @@
 
 <script>
 export default {
-	name: "MyRadio",
+	name: "my-radio",
 	data () {
 		return {
 			picked: '',

@@ -9,7 +9,7 @@
 
 <script>
 	export default {
-		name: "ButtonRectangular",
+		name: "button-rectangular",
 		data () {
 			return {
 				activePath: '/',
