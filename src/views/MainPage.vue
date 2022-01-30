@@ -38,11 +38,10 @@ export default {
 			if (picName !== '') {
 				return require('../assets/' + picName);
 			}
-			return require('../assets/courses.png');
+ 			return require('../assets/courses.png');
 		},
 	},
 	data () {
-		let Business;
 		return {
 			courseArray: [
 				{

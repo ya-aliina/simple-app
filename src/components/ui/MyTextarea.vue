@@ -1,8 +1,9 @@
 <template>
-	<div class="col-8">
-		<label for="exampleFormControlTextarea1">{{label}}</label>
-		<textarea class="form-control" id="exampleFormControlTextarea1" :rows="rows" v-model="inputValue"></textarea>
-	</div>
+<div class="row">
+	<label class="col-4" for="exampleFormControlTextarea1">{{label}}</label>
+	<textarea class="form-control col-8" id="exampleFormControlTextarea1" :rows="rows" v-model="inputValue"></textarea>
+</div>
+
 </template>
 
 <script>
@@ -24,7 +25,7 @@ export default {
 			default: null,
 		},
 		rows: {
-			type: Number,
+			type: String,
 			default: '6',
 		},
 	},

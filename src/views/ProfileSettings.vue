@@ -12,20 +12,31 @@
 			<div class="form-group">
 				<MyInput label="Имя"  v-model="name"/>
 				<MyInput label="Фамилия"  v-model="surname"/>
+				<MyInput label="Логин"  v-model="login"/>
+				<MyInput label="Пароль"  v-model="password"/>
 				<MyInput label="email"  v-model="email"/>
-	<!--			<MyInput label="Логин" placeholder="Введите логин ..." v-model=""/>-->
-	<!--			<MyInput label="Пароль" placeholder="Введите пароль" v-model=""/>-->
 				<MyCheckbox v-model="checkbox1"  label="Получать уведомления на почту"/>
 				<div class=" wrapper-radio d-flex px-10 ">
-					<div class="col-2">Очень важный вопрос</div>
+					<div class="col-2">Категория</div>
 					<div class=" col-8 radio">
 						<my-radio :options="radioOptions" v-model:selected="answer" />
 					</div>
 					<div>{{answer}}</div>
 				</div>
+				<div class=" wrapper-radio d-flex px-10 ">
+					<div class="col-2">Категория2</div>
+					<div class=" col-8 radio">
+						<my-radio :options="radioOptions2" v-model:selected="answer2" />
+					</div>
+					<div>{{answer2}}</div>
+				</div>
 
 <!--				<MyTextarea label="О себе" v-model="about" rows="8"/>-->
-				<MyButton label="Сохранить" type="submit"/>
+				<MyButton label="Сохранить" type="submit"  @click="showDialog"/>
+				<my-dialog
+					ref="dialog"
+				/>
+
 			</div>
 		</div>
 	</div>
@@ -34,11 +45,12 @@
 <script>
 import MyInput from "../components/ui/MyInput";
 import MyCheckbox from "../components/ui/MyCheckbox";
-import MyRadio from "../components/ui/MyRadio";
+// import MyRadio from "../components/ui/MyRadio";
 import MyTextarea from "../components/ui/MyTextarea";
 import MyButton from "../components/ui/MyButton";
-
+import MyDialog from "../components/ui/MyDialog";
 import Cover from "../components/Cover";
+import MySelect from "../components/ui/MySelect";
 
 export default {
 	name: "ProfileSettings",
@@ -46,20 +58,34 @@ export default {
 		Cover,
 		MyInput,
 		MyCheckbox,
-		MyRadio,
+		// MyRadio,
 		MyTextarea,
-		MyButton
+		MyButton,
+		MyDialog,
+		MySelect,
 	},
 	data() {
 		return {
 			surname: '',
 			name: '',
+			password: '',
+			login: '',
 			checkbox1: false,
 			picked: null,
 			about: '',
 			email: '',
 			answer: '',
+			answer2: '',
+			selectAnswer: '',
+			radioOptions2: [
+				'Ученик',
+				'Преподаватель',
+			],
 			radioOptions: [
+				'Ученик',
+				'Преподаватель',
+			],
+			selectOptions: [
 				'Да',
 				'Нет',
 				'Не знаю',
@@ -67,7 +93,9 @@ export default {
 		}
 	},
 	methods: {
-
+		showDialog () {
+			this.$refs.dialog.show();
+		}
 	}
 
 }

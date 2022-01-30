@@ -1,6 +1,6 @@
 <template>
 	<div data-vue-component="ButtonRectangular">
-		<div class="button_rectangular" :class="{ active: isActive(`${activePath}`) }" >
+		<div class="button_rectangular" :class="{ active: isActive(activePath) }" >
 			<img class="icon" :src="src" :alt="alt">
 			<div class="text">{{ text }}</div>
 		</div>
@@ -17,9 +17,9 @@
 		},
 		methods: {
 			isActive(activePath) {
-				if (activePath === this.$route.path) {
+				if (activePath === this.path) {
 					return true
-				}
+				} return false
 			},
 		},
 		watch: {
@@ -40,6 +40,9 @@
 				type: String,
 				default: 'Новая кнопка'
 			},
+			path: {
+				type: String,
+			}
 		},
 	}
 </script>

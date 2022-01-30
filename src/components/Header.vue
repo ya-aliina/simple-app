@@ -9,10 +9,10 @@
 				</div>
 				<div class="col-8 center">
 					<div class="button_wrapper">
-						<button-rectangular src="./icons/main.png" alt="home" text="Мои курсы" @click="goTo('/')"/>
-						<button-rectangular src="./icons/add.png" alt="add_lesson" text="Добавить урок" @click="goTo('/add_lesson')"/>
-						<button-rectangular src="./icons/files.png" alt="files" text="База знаний" @click="goTo('/knowledge_base')"/>
-						<button-rectangular src="./icons/calendar.png" alt="files" text="Мои события" @click="goTo('/my_events')"/>
+						<button-rectangular path="/" src="./icons/main.png" alt="home" text="Мои курсы" @click="goTo('/')"/>
+						<button-rectangular path="/add_lesson" src="./icons/add.png" alt="add_lesson" text="Добавить урок" @click="goTo('/add_lesson')"/>
+						<button-rectangular path="/knowledge_base" src="./icons/files.png" alt="files" text="База знаний" @click="goTo('/knowledge_base')"/>
+						<button-rectangular path="/my_events" src="./icons/calendar.png" alt="files" text="Мои события" @click="goTo('/my_events')"/>
 					</div>
 				</div>
 				<div class="col-2 right_side">

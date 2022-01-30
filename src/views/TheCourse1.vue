@@ -1,39 +1,4 @@
 <template>
-	<div data-vue-component="CourseForm">
-		<Cover/>
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div>
-						Курс {{$route.params.id}}
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-	</div>
-</template>
-
-<script>
-import Cover from "../components/Cover";
-
-export default {
-	name: 'CourseForm',
-	components: {
-		Cover,
-	},
-}
-</script>
-
-<style scoped>
-/deep/ .cover {
-	background-image: url("../assets/cover/the_course.jpg");
-}
-</style>
-
-
-<template>
 	<div data-vue-component="MainPage">
 		<Cover text="Business English"/>
 		<div class="wrapper">
@@ -44,7 +9,7 @@ export default {
 						 v-for = "course in courseArray"
 						 :key = "course.id"
 					>
-						<router-link :to="`/${course.id}`" class="router">
+						<router-link :to="`/1/${course.id}`" class="router">
 							<div class="course_item">
 								<img :src="getImgUrl(course.img)" alt="course_cover" class="course_cover">
 
@@ -87,7 +52,7 @@ export default {
 		},
 	},
 	data () {
-		let Business;
+
 		return {
 			courseArray: [
 				{
@@ -168,7 +133,7 @@ export default {
 
 .course_cover {
 	border-radius: 4px;
-	width: 20%;
+	width: 17%;
 	height: auto;
 }
 
@@ -182,3 +147,5 @@ export default {
 }
 
 </style>
+
+
