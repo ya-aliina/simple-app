@@ -1,6 +1,6 @@
 <template>
 	<div data-vue-component="MyEvents">
-		<Cover text="Мои события"/>
+		<cover text="Мои события"/>
 	</div>
 </template>
 

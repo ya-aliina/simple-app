@@ -1,184 +1,140 @@
 <template>
-	<div data-vue-component="CourseForm">
-		<Cover/>
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div>
-						Курс {{$route.params.id}}
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-	</div>
+    <div data-vue-component="CourseForm">
+        <cover text=""/>
+        <div class="wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12"
+                         v-for="lesson in lessonsArray"
+                         :key="lesson.id"
+                    >
+                        <router-link :to="`/${lesson.courseName}/${lesson.courseId}/${lesson.id}`" class="router">
+                                <div v-if="lesson.courseId == $route.params.id" class="course_item_wrapper">
+                                    <div class="course_item">
+                                        <img :src="getImgUrl(lesson.img)" alt="course_cover" class="course_cover">
+                                        <div>{{ lesson.title }}</div>
+                                    </div>
+                                </div>
+                        </router-link>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
-import Cover from "../components/Cover";
+import Cover from "@/components/Cover";
 
 export default {
-	name: 'CourseForm',
-	components: {
-		Cover,
-	},
+    name: "course-form",
+    components: {
+        Cover
+    },
+    data() {
+        return {
+            lessonsArray: [
+                {
+                    courseId: 1,
+                    courseName: 'business_english',
+                    id: 1,
+                    title: "Урок 1",
+                    img: '',
+                },
+                {
+                    courseId: 1,
+                    courseName: 'business_english',
+                    id: 2,
+                    title: "Урок 2",
+                    img: '',
+                },
+                {
+                    courseId: 1,
+                    courseName: 'business_english',
+                    id: 3,
+                    title: "Урок 3",
+                    img: '',
+                },
+                {
+                    courseId: 2,
+                    courseName: 'excel_basic_course',
+                    id: 4,
+                    title: "Урок 1",
+                    img: '',
+                },
+                {
+                    courseId: 3,
+                    courseName: 'power_point_basic_course',
+                    id: 5,
+                    title: "Урок 1",
+                    img: '',
+                },
+            ]
+        }
+    },
+    methods: {
+        getImgUrl(picName) {
+            if (picName !== '') {
+                return require('../assets/' + picName);
+            }
+            return require('../assets/courses.png');
+        },
+    },
 }
 </script>
 
 <style scoped>
 /deep/ .cover {
-	background-image: url("../assets/cover/the_course.jpg");
-}
-</style>
-
-
-<template>
-	<div data-vue-component="MainPage">
-		<Cover text="Business English"/>
-		<div class="wrapper">
-			<div class="container">
-				<div class="row">
-
-					<div class="col-12 course_item_wrapper"
-						 v-for = "course in courseArray"
-						 :key = "course.id"
-					>
-						<router-link :to="`/${course.id}`" class="router">
-							<div class="course_item">
-								<img :src="getImgUrl(course.img)" alt="course_cover" class="course_cover">
-
-								<div>{{course.title}}</div>
-							</div>
-						</router-link>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</div>
-</template>
-
-<!--<script>-->
-<!--export default {-->
-<!--	name: "TheCourse1"-->
-<!--}-->
-<!--</script>-->
-
-<!--<style scoped>-->
-
-<!--</style>-->
-
-
-<script>
-import Cover from "../components/Cover";
-
-export default {
-	name: "TheCourse1",
-	components: {
-		Cover
-	},
-	methods: {
-		getImgUrl(picName) {
-			if (picName !== '') {
-				return require('../assets/' + picName);
-			}
-			return require('../assets/courses.png');
-		},
-	},
-	data () {
-		let Business;
-		return {
-			courseArray: [
-				{
-					id: 1,
-					title: "Урок 1",
-					description: "Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание",
-					img: '',
-				},
-				{
-					id: 2,
-					title: "Урок 2",
-					description: "Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание",
-					img: '',
-				},
-				{
-					id: 3,
-					title: "Урок 3",
-					description: "Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание",
-					img: '',
-				},
-				{
-					id: 4,
-					title: "Урок 4",
-					description: "Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание",
-					img: '',
-				},
-				{
-					id: 5,
-					title: "Урок 5",
-					description: "Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание",
-					img: '',
-				},
-			]
-		}
-	}
-}
-</script>
-
-<style scoped>
-/deep/ .cover {
-	background-image: url("../assets/cover/courses.jpg");
+    background-image: url("../assets/cover/courses.jpg");
 }
 
 .wrapper {
-	background: #f1f4f6;
-	padding-bottom: 30px;
+    background: #f1f4f6;
+    padding-bottom: 30px;
 }
 
 .course_item_wrapper {
-	margin-top: 30px;
+    margin-top: 30px;
 }
 
 .course_item {
-	cursor: pointer;
-	display: flex;
-	padding: 28px;
-	border-radius: 6px;
-	background: #fff;
-	box-shadow: 0 1px 4px rgba(66,72,78,.12);
-	text-decoration: none;
-	transition: all 0.5s 0s ease;
+    cursor: pointer;
+    display: flex;
+    padding: 28px;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(66, 72, 78, .12);
+    text-decoration: none;
+    transition: all 0.5s 0s ease;
 }
 
 .course_item:hover {
-	transition: all 0.5s 0s ease;
-	transform: scale(1.04)
-	/*transform: translate(0px, -10px);*/
+    transition: all 0.5s 0s ease;
+    transform: scale(1.04)
+    /*transform: translate(0px, -10px);*/
 }
 
 .course_item div {
-	padding-left: 20px;
-	font-size: 20px;
-	font-weight: 500;
-	color: #42484e;
-	text-decoration: none;
+    padding-left: 20px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #42484e;
+    text-decoration: none;
 }
 
-
 .course_cover {
-	border-radius: 4px;
-	width: 20%;
-	height: auto;
+    border-radius: 4px;
+    width: 17%;
+    height: auto;
 }
 
 .router {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 .router:hover {
-	transition: all 0.5s 0s ease;
-	transform: translate(0px, -23px);
+    transition: all 0.5s 0s ease;
+    transform: translate(0px, -23px);
 }
 
 </style>

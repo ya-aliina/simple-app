@@ -1,6 +1,6 @@
 <template>
 	<div data-vue-component="ProfileSettings">
-		<Cover text="Настройки профиля"/>
+		<cover text="Настройки профиля"/>
 		<div class="container">
 			<div class="row">
 				<div class="col">

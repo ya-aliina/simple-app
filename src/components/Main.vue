@@ -18,10 +18,6 @@ export default {
 <style scoped>
 .wrapper {
 	background: #f1f4f6;
-	padding-bottom: 30px;
-
 }
-
-
 
 </style>
