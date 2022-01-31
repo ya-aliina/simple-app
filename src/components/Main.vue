@@ -18,6 +18,7 @@ export default {
 <style scoped>
 .wrapper {
 	background: #f1f4f6;
+    min-height: 81vh;
 }
 
 </style>

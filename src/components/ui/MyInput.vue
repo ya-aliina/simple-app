@@ -1,11 +1,14 @@
 <template>
 	<div class="row">
-		<div class="col-4">
-			<label for="my_input">{{ label }}</label>
-		</div>
-		<div class="col-8">
-			<input class="form-control" type="text" id="my_input" v-model="inputValue">
-		</div>
+
+<!--			<label for="my_input">{{ label }}</label>-->
+
+			<input class="form-control"
+                   :class="class"
+                   :type="type"
+                   :placeholder="placeholder"
+                   :id="id"
+                   v-model="inputValue">
 	</div>
 </template>
 
@@ -28,8 +31,19 @@ export default {
 		},
 		label: {
 			type: String,
-			default: 'Мое поле ввода'
-		}
+		},
+        type: {
+            type: String,
+        },
+        placeholder: {
+            type: String,
+        },
+        class: {
+            type: String,
+        },
+        id: {
+            type: String,
+        },
 	},
 	watch: {
 		modelValue: {

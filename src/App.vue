@@ -1,5 +1,5 @@
 <template>
-	<Header/>
+	<Header @click="showDialog"/>
 	<Main/>
 	<Footer/>
 </template>

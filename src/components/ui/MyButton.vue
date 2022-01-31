@@ -1,5 +1,7 @@
 <template>
-	<button type="submit" class="btn btn-primary mb-2">{{label}}</button>
+	<button type="submit" class="btn btn-primary" :class="class">
+        <slot></slot>
+    </button>
 </template>
 
 <script>
@@ -14,6 +16,10 @@ export default {
 			type: String,
 			default: 'submit',
 		},
+        class: {
+            type: String,
+            default: 'submit',
+        },
 	},
 };
 </script>

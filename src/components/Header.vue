@@ -8,7 +8,7 @@
 					</div>
 				</div>
 				<div class="col-8 center">
-					<div class="button_wrapper">
+					<div class="button_wrapper" v-if="$store.getters['user/isAuth']">
 						<button-rectangular path="/" src="./icons/main.png" alt="home" text="Мои курсы" @click="goTo('/')"/>
 						<button-rectangular path="/add_lesson" src="./icons/add.png" alt="add_lesson" text="Добавить урок" @click="goTo('/add_lesson')"/>
 						<button-rectangular path="/knowledge_base" src="./icons/files.png" alt="files" text="База знаний" @click="goTo('/knowledge_base')"/>
@@ -30,18 +30,24 @@
 <script>
 import ButtonRectangular from "./ui/ButtonRectangular";
 import ButtonRound from "./ui/ButtonRound";
+import toggleMixin from "@/mixins/toggleMixin";
 
 export default {
 	name: "Header",
+    mixins: [toggleMixin],
+    data () {
+	    // return {
+        //     dialogVisible: false,
+        // }
+    },
 	components: {
 		ButtonRectangular,
 		ButtonRound
 	},
-
 	methods: {
 		goTo(link) {
 			this.$router.push(link)
-		}
+		},
 	}
 }
 </script>
@@ -96,16 +102,6 @@ export default {
 		cursor: pointer;
 	}
 
-
-	/*.button_content ::after {*/
-	/*	display: flex;*/
-	/*	visibility: hidden;*/
-	/*	width: 100%;*/
-	/*	height: 4px;*/
-	/*	border-radius: 100px 100px 0 0;*/
-	/*	background-color: green;*/
-	/*}*/
-
 	.left_wrapper {
 		display: flex;
 	}
@@ -123,12 +119,5 @@ export default {
 
 	.active {
 		border-bottom: 4px solid #3CB46E;
-
-
 	}
-
-
-
-
-
 </style>
