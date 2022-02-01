@@ -5,6 +5,7 @@ import MyDialog from "@/components/ui/MyDialog";
 import MyInput from "@/components/ui/MyInput";
 import MySelect from "@/components/ui/MySelect";
 import MyTextarea from "@/components/ui/MyTextarea";
+import MyButtonAuth from "@/components/ui/MyButtonAuth";
 
 export default [
 	MyRadio,
@@ -13,6 +14,7 @@ export default [
 	MyDialog,
 	MyInput,
 	MySelect,
-	MyTextarea
+	MyTextarea,
+	MyButtonAuth
 ]
 

@@ -1,10 +1,11 @@
 <template>
-		<div class="col wrapper">
+    <div class="check_wrapper">
+        <input class="form-check-input my_input" :class="input_class" type="checkbox" id="my_checkbox" value="" v-model="inputValue" />
+        <label class="form-check-label" :class="label_class" for="my_checkbox">{{ label }}</label>
+    </div>
 <!--			<div class="form-check form-check-inline">-->
-				<input class="form-check-input" type="checkbox" id="my_checkbox" value="" v-model="inputValue" />
-				<label class="form-check-label" for="my_checkbox">{{ label }}</label>
+
 <!--			</div>-->
-		</div>
 </template>
 
 <script>
@@ -25,6 +26,13 @@ export default {
 			type: String,
 			default: null,
 		},
+        input_class: {
+            type: String,
+        },
+        label_class: {
+
+        }
+
 	},
 	watch: {
 		modelValue () {
@@ -38,7 +46,14 @@ export default {
 </script>
 
 <style scoped>
-.wrapper {
-	padding-top: 20px;
-}
+    .check_wrapper {
+        padding-top: 20px;
+        font-size: 15px;
+        display: flex;
+    }
+    .my_input {
+        margin-right: 20px;
+        min-width: 15px;
+        min-height: 15px;
+    }
 </style>
