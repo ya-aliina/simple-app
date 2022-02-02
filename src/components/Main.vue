@@ -6,12 +6,14 @@
 
 <script>
 import Cover from "./Cover";
+import toggleMixin from "@/mixins/toggleMixin";
 
 export default {
 	name: "Main",
 	components: {
 		Cover
-	}
+	},
+    mixins: [toggleMixin],
 }
 </script>
 

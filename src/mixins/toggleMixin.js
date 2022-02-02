@@ -3,6 +3,8 @@ export default {
     data () {
         return {
             dialogVisible: false,
+            animation: '',
+
         }
     },
     props: {
@@ -12,14 +14,19 @@ export default {
         }
     },
     methods: {
-        hideDialog1() {
-            this.$emit('update:show', false);
+        hideDialogWithoutBtn() {
+            setTimeout ( ()=> this.$emit('update:show', false), 500 );
+            this.$emit('update:class', 'animate_out');
         },
-        hideDialog () {
-            this.dialogVisible = false;
-        },
+
         showDialog () {
             this.dialogVisible = true;
+            this.animation = 'animate_in';
+        },
+
+        hideDialog () {
+            setTimeout ( ()=> this.dialogVisible = false, 500 );
+            this.animation = 'animate_out';
         }
     },
     mounted() {

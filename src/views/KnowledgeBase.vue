@@ -17,6 +17,6 @@ export default {
 
 <style scoped>
 /deep/ .cover {
-	background-image: url("../assets/cover/knowledge_base.jpg");
+	background-image: url("../assets/cover/knowledge_base_dark.jpg");
 }
 </style>

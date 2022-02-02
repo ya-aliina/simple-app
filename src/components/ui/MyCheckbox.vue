@@ -3,9 +3,6 @@
         <input class="form-check-input my_input" :class="input_class" type="checkbox" id="my_checkbox" value="" v-model="inputValue" />
         <label class="form-check-label" :class="label_class" for="my_checkbox">{{ label }}</label>
     </div>
-<!--			<div class="form-check form-check-inline">-->
-
-<!--			</div>-->
 </template>
 
 <script>
@@ -17,7 +14,6 @@ export default {
 		};
 	},
 	props: {
-
 		modelValue: {
 			type: Boolean,
 			default: null,
@@ -32,7 +28,6 @@ export default {
         label_class: {
 
         }
-
 	},
 	watch: {
 		modelValue () {

@@ -17,6 +17,7 @@
 		},
 		methods: {
 			isActive(activePath) {
+			    console.log(activePath)
 				if (activePath === this.path) {
 					return true
 				} return false

@@ -30,14 +30,11 @@
                     </div>
                     <div>{{ answer2 }}</div>
                 </div>
-                                <my-dialog v-model:show="dialogVisible">
+                                <my-dialog v-model:show="dialogVisible" v-model:class="animation">
                                     <div>Сохранить изменения?</div>
                                     <my-button @click="hideDialog">Сохранить</my-button>
                                 </my-dialog>
-
                 <my-button @click="showDialog">Сохранить</my-button>
-
-
             </div>
         </div>
     </div>
@@ -86,7 +83,7 @@ export default {
 
 <style scoped>
 /deep/ .cover {
-    background-image: url("../assets/cover/profile_settings.jpg");
+    background-image: url("../assets/cover/profile_settings_dark.jpg");
 }
 
 .title {

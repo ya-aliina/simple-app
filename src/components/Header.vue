@@ -21,11 +21,23 @@
                     </div>
                 </div>
                 <div class="col-2 right_side" v-if="$store.getters['user/isAuth']">
-                    <div class="right_wrapper" >
-                        <button-round src="./icons/message.png" alt="message" @click="goTo('/messages')"/>
-                        <button-round src="./icons/notification.png" alt="notification"
-                                      @click="goTo('/notifications')"/>
-                        <img class="avatar" src="../assets/avatar.svg" alt="avatar" @click="goTo('/profile_settings')">
+                    <div class="right_wrapper">
+                        <button-round src="./icons/message.png" alt="message" @click="doLogout"/>
+                        <button-round src="./icons/notification.png" alt="notification" @click="showDialog"/>
+                        <!--                        <img class="avatar" src="../assets/avatar.svg" alt="avatar" @click="goTo('/profile_settings')"/>-->
+                        <!--TODO делаем меню-->
+                        <div class="auth_btn_wrapper">
+                            <my-button-auth @click="showDialog" >Авторизоваться</my-button-auth>
+                        </div>
+                        <my-dialog v-model:show="dialogVisible" v-model:class="animation">
+
+                                <div>Сохранить изменения?</div>
+                                <my-button @click="hideDialog">Сохранить</my-button>
+
+                        </my-dialog>
+
+
+
                     </div>
                 </div>
             </div>
@@ -42,9 +54,9 @@ export default {
     name: "Header",
     mixins: [toggleMixin],
     data() {
-        // return {
-        //     dialogVisible: false,
-        // }
+        return {
+            userMenu: true,
+        }
     },
     components: {
         ButtonRectangular,
@@ -54,7 +66,17 @@ export default {
         goTo(link) {
             this.$router.push(link)
         },
-    }
+        doLogout() {
+            this.$store.dispatch('user/logout')
+        },
+        showUserMenu () {
+            this.userMenu = true;
+        },
+        hideUserMenu () {
+            this.userMenu = false;
+        }
+    },
+
 }
 </script>
 
@@ -64,7 +86,7 @@ export default {
     height: 64px;
     box-shadow: 0 4px 12px 0 rgba(0, 0, 0, .12);
     /*background: #FFFFFF;*/
-    background: rgba(245, 245, 245), 0.75);
+    background: rgba(245, 245, 245), 0.75;
     backdrop-filter: blur(12px);
     padding: 0 12px;
 }
@@ -134,4 +156,40 @@ export default {
 .active {
     border-bottom: 4px solid #3CB46E;
 }
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
 </style>

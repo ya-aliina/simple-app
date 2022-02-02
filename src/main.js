@@ -3,6 +3,25 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import components from '@/components/ui';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+	apiKey: "AIzaSyDVxMI_zm4zbl0YbRDLgG6FaciEBTle8OE",
+	authDomain: "simple-a39bb.firebaseapp.com",
+	projectId: "simple-a39bb",
+	storageBucket: "simple-a39bb.appspot.com",
+	messagingSenderId: "752393134792",
+	appId: "1:752393134792:web:cc9787e6964ea6f7977bfd"
+};
+
+// Initialize Firebase
+initializeApp(firebaseConfig);
 
 const app = createApp(App);
 
@@ -14,7 +33,19 @@ components.forEach(component => {
 });
 
 
-app.mount('#app');
+const auth = getAuth();
+let mounted =false;
+onAuthStateChanged(auth, (user) => {
+
+	store.commit('user/setAuthUser', user);
+	console.log('onAuthStateChanged', user);
+	if (!mounted) {
+		app.mount('#app');
+		mounted = true;
+	}
+
+});
+
 
 
 

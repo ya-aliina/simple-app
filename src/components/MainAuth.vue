@@ -42,14 +42,12 @@
                                    v-model="agreement" label="Регистрируясь, я соглашаюсь с
                                    Условиями использования продуктов Simple и принимаю Политику конфиденциальности."
                                />
-                               <my-button class="button">Зарегистрироваться</my-button>
+                               <my-button class="button" @click="doRegisterClick">Зарегистрироваться</my-button>
                                <div class="auth">
                                    <div>Уже есть аккаунт?</div>
                                    <div class="link-auth" @click="doLogin">Войдите</div>
                                </div>
                            </div>
-
-
                        </div>
                    </my-dialog>
                </div>
@@ -92,8 +90,22 @@ export default {
             }).then((status) => {
                 if(status === 'OK') {
                     this.$router.push('/');
-                } else if (status === 'error') {
-                    alert ('Ошибка авторизации')
+                } else if (status !== 'OK') {
+                    alert ('Ошибка авторизации');
+                    console.warn(status)
+                }
+            });
+        },
+        doRegisterClick () {
+            this.$store.dispatch('user/doCreate',{
+                login: this.newLogin,
+                password: this.newPassword,
+            }).then((status) => {
+                if(status === 'OK') {
+                    this.$router.push('/');
+                } else if (status !== 'OK') {
+                    alert ('Ошибка регистрации');
+                    console.warn(status)
                 }
             });
         },

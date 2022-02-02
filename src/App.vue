@@ -28,13 +28,13 @@ export default {
 </script>
 
 <style>
-
-/*Main, MainAuth {*/
-/*	min-height: 100vh;*/
-/*}*/
-
 Header {
-	position: fixed;
-}
 
+}
+Main {
+
+}
+Footer{
+
+}
 </style>
