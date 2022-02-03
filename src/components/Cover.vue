@@ -4,9 +4,10 @@
             <div class="row">
                 <div class="col">
                     <div class="text_wrapper">
-                        <div class="text">{{ text }}</div>
+                        <div class="text">
+                            <slot></slot>
+                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -15,7 +16,7 @@
 
 <script>
 export default {
-    name: "Cover",
+    name: "cover",
     props: {
         text: {
             type: String,

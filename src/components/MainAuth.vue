@@ -15,16 +15,18 @@
                         Для продолжения авторизуйтесь.
                    </div>
                    <div class="auth_btn_wrapper">
-                       <my-button-auth @click="showDialog" >Авторизоваться</my-button-auth>
+                       <my-button-auth @click="showDialog" >
+                           Авторизоваться
+                       </my-button-auth>
                    </div>
-                   <my-dialog v-model:show="dialogVisible">
+                   <my-dialog v-model:show="dialogVisible" v-model:class="animation">
                        <div class="registration-form">
                            <div class="login" v-if="showLogin">
                                <img src="../assets/login-cover.png" alt="" class="img_login" >
                                <div class="title">Добро пожаловать!</div>
                                <my-input placeholder="Укажите логин" v-model="login" id="login" type="text" class="form-control-lg input"/>
                                <my-input placeholder="Введите пароль" v-model="password" id="password" type="password" class="form-control-lg input"/>
-                               <my-button class="button" @click="onAuthClick">Войти</my-button>
+                               <my-button class="button btn-primary" @click="onAuthClick">Войти</my-button>
                                <div class="auth">
                                    <div>Впервые на Simple?</div>
                                    <div class="link-auth" @click="doRegister">Зарегистрируйтесь</div>
@@ -42,7 +44,7 @@
                                    v-model="agreement" label="Регистрируясь, я соглашаюсь с
                                    Условиями использования продуктов Simple и принимаю Политику конфиденциальности."
                                />
-                               <my-button class="button" @click="doRegisterClick">Зарегистрироваться</my-button>
+                               <my-button class="button btn-primary" @click="doRegisterClick">Зарегистрироваться</my-button>
                                <div class="auth">
                                    <div>Уже есть аккаунт?</div>
                                    <div class="link-auth" @click="doLogin">Войдите</div>

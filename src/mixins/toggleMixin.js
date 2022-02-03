@@ -27,7 +27,10 @@ export default {
         hideDialog () {
             setTimeout ( ()=> this.dialogVisible = false, 500 );
             this.animation = 'animate_out';
-        }
+        },
+        goTo(link) {
+            this.$router.push(link)
+        },
     },
     mounted() {
 

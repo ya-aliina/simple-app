@@ -6,6 +6,7 @@ import MyInput from "@/components/ui/MyInput";
 import MySelect from "@/components/ui/MySelect";
 import MyTextarea from "@/components/ui/MyTextarea";
 import MyButtonAuth from "@/components/ui/MyButtonAuth";
+import MyInputForSettings from "@/components/ui/MyInputForSettings";
 
 export default [
 	MyRadio,
@@ -15,6 +16,7 @@ export default [
 	MyInput,
 	MySelect,
 	MyTextarea,
-	MyButtonAuth
+	MyButtonAuth,
+	MyInputForSettings
 ]
 

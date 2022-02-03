@@ -59,7 +59,7 @@ export default {
             return createUserWithEmailAndPassword(auth, data.login, data.password)
                 .then((userCredential) => {
                     context.state.user = userCredential.user;
-                    console.log('Auth user', context.state.user);
+                    // console.log('Auth user', context.state.user);
                     return 'OK';
                 })
                 .catch((error) => {

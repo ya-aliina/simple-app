@@ -1,7 +1,9 @@
 <template>
     <div class="dialog"  v-if="show"  @click.stop="hideDialogWithoutBtn">
-        <div  @click.stop class="dialog_content" :class="class">
-            <slot></slot>
+        <div class="dialog_body">
+            <div  @click.stop class="dialog_content" :class="class">
+                <slot></slot>
+            </div>
         </div>
     </div>
 </template>
@@ -34,16 +36,22 @@ export default {
 
 <style scoped>
 .dialog {
-    width: 100vw;
-    height: 100vh;
+    /*top: 0;*/
+    /*bottom: 0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*background: rgba(0, 0, 0, 0.4);*/
+    /*position: absolute;*/
+    /*display: flex;*/
+    /*overflow: hidden;*/
+
+    position: fixed;
     top: 0;
-    bottom: 0;
     left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.4);
-    position: absolute;
-    display: flex;
-    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    background: rgba(0, 0, 0, 0.39);
 }
 
 .dialog_content {
@@ -53,6 +61,12 @@ export default {
     min-height: 58px;
     padding: 20px;
     min-width: 200px;
+}
+
+.dialog_body {
+    min-height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .animate_in {

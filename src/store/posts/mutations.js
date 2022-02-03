@@ -3,7 +3,6 @@ export default {
     createPost() {
 
     },
-    addCourse () {
-
+    addPost () {
     },
 }

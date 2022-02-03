@@ -1,6 +1,6 @@
 <template>
 	<div data-vue-component="AddLesson">
-		<cover text="Добавить урок"/>
+		<cover>Добавить урок</cover>
 		<div class="wrapper">
 			<div class="container">
 

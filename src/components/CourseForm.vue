@@ -1,22 +1,33 @@
 <template>
     <div data-vue-component="CourseForm">
-        <cover text=""/>
+        <cover text=""></cover>
         <div class="wrapper">
             <div class="container">
                 <div class="row">
-                    <div class="col-12"
-                         v-for="lesson in lessonsArray"
-                         :key="lesson.id"
-                    >
+                    <div v-for="lesson in lessonsArray" :key="lesson.id" class="col-12">
                         <router-link :to="`/${lesson.courseName}/${lesson.courseId}/${lesson.id}`" class="router">
-                                <div v-if="lesson.courseId == $route.params.id" class="course_item_wrapper">
-                                    <div class="course_item">
-                                        <img :src="getImgUrl(lesson.img)" alt="course_cover" class="course_cover">
-                                        <div>{{ lesson.title }}</div>
-                                    </div>
+                            <div class="course_item_wrapper">
+                                <div class="course_item">
+                                    <img :src="getImgUrl(lesson.img)" alt="course_cover" class="course_cover">
+                                    <div>{{ lesson.title }}</div>
                                 </div>
+                            </div>
                         </router-link>
                     </div>
+
+                    <!--                    <div class="col-12"-->
+                    <!--                         v-for="lesson in lessonsArray"-->
+                    <!--                         :key="lesson.id"-->
+                    <!--                    >-->
+                    <!--                        <router-link :to="`/${lesson.courseName}/${lesson.courseId}/${lesson.id}`" class="router">-->
+                    <!--                                <div v-if="lesson.courseId == $route.params.id" class="course_item_wrapper">-->
+                    <!--                                    <div class="course_item">-->
+                    <!--                                        <img :src="getImgUrl(lesson.img)" alt="course_cover" class="course_cover">-->
+                    <!--                                        <div>{{ lesson.title }}</div>-->
+                    <!--                                    </div>-->
+                    <!--                                </div>-->
+                    <!--                        </router-link>-->
+                    <!--                    </div>-->
                 </div>
             </div>
         </div>
@@ -33,43 +44,43 @@ export default {
     },
     data() {
         return {
-            lessonsArray: [
-                {
-                    courseId: 1,
-                    courseName: 'business_english',
-                    id: 1,
-                    title: "Урок 1",
-                    img: '',
-                },
-                {
-                    courseId: 1,
-                    courseName: 'business_english',
-                    id: 2,
-                    title: "Урок 2",
-                    img: '',
-                },
-                {
-                    courseId: 1,
-                    courseName: 'business_english',
-                    id: 3,
-                    title: "Урок 3",
-                    img: '',
-                },
-                {
-                    courseId: 2,
-                    courseName: 'excel_basic_course',
-                    id: 4,
-                    title: "Урок 1",
-                    img: '',
-                },
-                {
-                    courseId: 3,
-                    courseName: 'power_point_basic_course',
-                    id: 5,
-                    title: "Урок 1",
-                    img: '',
-                },
-            ]
+            // lessonsArray: [
+            //     {
+            //         courseId: 1,
+            //         courseName: 'business_english',
+            //         id: 1,
+            //         title: "Урок 1",
+            //         img: '',
+            //     },
+            //     {
+            //         courseId: 1,
+            //         courseName: 'business_english',
+            //         id: 2,
+            //         title: "Урок 2",
+            //         img: '',
+            //     },
+            //     {
+            //         courseId: 1,
+            //         courseName: 'business_english',
+            //         id: 3,
+            //         title: "Урок 3",
+            //         img: '',
+            //     },
+            //     {
+            //         courseId: 2,
+            //         courseName: 'excel_basic_course',
+            //         id: 4,
+            //         title: "Урок 1",
+            //         img: '',
+            //     },
+            //     {
+            //         courseId: 3,
+            //         courseName: 'power_point_basic_course',
+            //         id: 5,
+            //         title: "Урок 1",
+            //         img: '',
+            //     },
+            // ]
         }
     },
     methods: {
@@ -80,12 +91,18 @@ export default {
             return require('../assets/courses.png');
         },
     },
+    computed: {
+        lessonsArray() {
+            return this.$store.getters['lessons/lessonsByCourseId'](this.$route.params.id);
+        },
+    }
 }
+
 </script>
 
 <style scoped>
 /deep/ .cover {
-    background-image: url("../assets/cover/courses.jpg");
+    background-image: url("../assets/cover/courses_dark.jpg");
 }
 
 .wrapper {

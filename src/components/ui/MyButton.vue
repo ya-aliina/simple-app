@@ -1,5 +1,5 @@
 <template>
-	<button type="submit" class="btn btn-primary" :class="class">
+	<button type="submit" class="btn" :class="class">
         <slot></slot>
     </button>
 </template>
@@ -25,6 +25,10 @@ export default {
 </script>
 
 <style scoped>
+button {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
 
 </style>
 

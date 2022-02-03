@@ -1,8 +1,8 @@
 <template>
-	<div class="row">
-
-<!--			<label for="my_input">{{ label }}</label>-->
-
+	<div class="wrapper">
+			<label for="id">
+                <slot class="text"></slot>
+            </label>
 			<input class="form-control"
                    :class="class"
                    :type="type"
@@ -15,17 +15,13 @@
 
 <script>
 export default {
-	name: "my-input",
+	name: "my-input-for-settings",
 	data () {
 		return {
 			inputValue: '',
 		}
 	},
 	props: {
-		// placeholder: {
-		// 	type: String,
-		// 	default: '',
-		// },
 		modelValue: {
 			type: String,
 			default: null
@@ -65,7 +61,20 @@ export default {
 </script>
 
 <style scoped>
-.row {
+.wrapper {
 	padding-top: 20px;
+    display: flex;
 }
+
+label {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    width: 150px;
+}
+
+input {
+    max-width: 360px;
+}
+
 </style>

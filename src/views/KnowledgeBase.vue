@@ -1,6 +1,6 @@
 <template>
 	<div data-vue-component="KnowledgeBase">
-		<cover text="База знаний"/>
+        <cover>База знаний</cover>
 	</div>
 </template>
 
