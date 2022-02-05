@@ -16,12 +16,12 @@ const routes = [
     component: MainPage,
   },
   {
-    path: '/:name/:id',
+    path: '/:id',
     name: 'CourseForm',
     component: CourseForm,
   },
   {
-    path: '/:name/:id/:id',
+    path: '/:id/:idLesson',
     name: 'lessonForm',
     component: LessonForm,
   },

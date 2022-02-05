@@ -1,7 +1,7 @@
 <template>
-	<div class="row">
+	<div class="wrapper">
 
-<!--			<label for="my_input">{{ label }}</label>-->
+			<label for="id"><slot></slot></label>
 
 			<input class="form-control"
                    :class="class"
@@ -65,7 +65,9 @@ export default {
 </script>
 
 <style scoped>
-.row {
+.wrapper {
+    display: flex;
 	padding-top: 20px;
+    background: white;
 }
 </style>

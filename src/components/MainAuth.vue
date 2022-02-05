@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper">
+    <div class="wrapper1">
         <div class="container">
            <div class="row align-items-center">
                <div class="col-6">
@@ -29,7 +29,7 @@
                                <my-button class="button btn-primary" @click="onAuthClick">Войти</my-button>
                                <div class="auth">
                                    <div>Впервые на Simple?</div>
-                                   <div class="link-auth" @click="doRegister">Зарегистрируйтесь</div>
+                                   <div class="link-auth" @click="signInWithGoogle">Зарегистрируйтесь</div>
                                </div>
                            </div>
                            <div class="registration" v-if="showRegistration">
@@ -64,6 +64,12 @@
 
 <script>
 import toggleMixin from "@/mixins/toggleMixin";
+// import {GoogleAuthProvider} from "firebase/auth";
+import {
+    getAuth,
+    signInWithPopup,
+    GoogleAuthProvider
+} from "firebase/auth";
 
 export default {
     name: "MainAuth",
@@ -98,7 +104,7 @@ export default {
                 }
             });
         },
-        doRegisterClick () {
+        doRegisterClick() {
             this.$store.dispatch('user/doCreate',{
                 login: this.newLogin,
                 password: this.newPassword,
@@ -110,6 +116,15 @@ export default {
                     console.warn(status)
                 }
             });
+        },
+        signInWithGoogle () {
+            const provider = new GoogleAuthProvider();
+            signInWithPopup(getAuth(), provider)
+                .then((status) => {
+                    if (status === 'OK') {
+                        this.$router.push('/')
+                    }
+                })
         },
         doRegister () {
             this.showLogin = false;
@@ -124,7 +139,7 @@ export default {
 </script>
 
 <style scoped>
-    .wrapper {
+    .wrapper1 {
         /*top: 0;*/
         /*bottom: 0;*/
         /*left: 0;*/

@@ -1,8 +1,8 @@
 export default {
     addCourse(state, data) {
-        state.courses.push(data);
+        state.comments.push(data);
     },
     clear(state) {
-        state.courses = [];
+        state.comments = [];
     }
 }

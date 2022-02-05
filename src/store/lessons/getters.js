@@ -6,6 +6,11 @@ export default {
         return state.lessons;
     },
     lessonsByCourseId(state) {
-        return (id) => state.lessons.filter(lesson => lesson.courseId == id)
+        // return (courseId) => state.lessons.find(item => item.courseId == courseId);
+        return (courseId) => state.lessons.filter((lesson) => {
+            // lesson.courseId == courseId;
+            console.log(lesson, courseId)
+            return  lesson.courseId == courseId;
+        })
     }
 }

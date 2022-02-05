@@ -2,10 +2,10 @@ import { createStore } from 'vuex'
 import userStore from './user';
 import coursesStore from './courses';
 import lessonsStore from './lessons';
-import postsStore from './posts';
 
 export default createStore({
 	state: {
+		isMyCourseBtnActive: false,
 	},
 	mutations: {
 	},
@@ -15,7 +15,6 @@ export default createStore({
 		user: userStore,
 		courses: coursesStore,
 		lessons: lessonsStore,
-		posts: postsStore,
 	},
 })
 

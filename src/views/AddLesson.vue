@@ -3,32 +3,38 @@
 		<cover>Добавить урок</cover>
 		<div class="wrapper">
 			<div class="container">
+                <div class="form">
+                    <my-input-for-settings type="text" id="name" v-model="courseTitle" >
+                        Название курса
+                    </my-input-for-settings>
+                    <button @click="onAdd">Добавить</button>
+                </div>
 
-				<form>
-					<div class="row pt-5">
+<!--				<form>-->
+<!--					<div class="row pt-5">-->
 
-						<div class="col-4">
-							Выберите курс, который вы хотите обновить
-						</div>
-						<div class="col-8">
-							<my-select :options="selectOptions" v-model:selected="selectAnswer"/>
-						</div>
-						<div class="pt-1">
-							<my-input label="Название курса"  v-model="course"/>
-						</div>
-						<div class="pt-1">
-							<my-input label="Название урока" v-model="lesson"/>
-						</div>
-						<my-textarea label="Cодержание" v-model="about" rows="8"/>
+<!--						<div class="col-4">-->
+<!--							Выберите курс, который вы хотите обновить-->
+<!--						</div>-->
+<!--						<div class="col-8">-->
+<!--							<my-select :options="selectOptions" v-model:selected="selectAnswer"/>-->
+<!--						</div>-->
+<!--						<div class="pt-1">-->
+<!--							<my-input label="Название курса"  v-model="course"/>-->
+<!--						</div>-->
+<!--						<div class="pt-1">-->
+<!--							<my-input label="Название урока" v-model="lesson"/>-->
+<!--						</div>-->
+<!--						<my-textarea label="Cодержание" v-model="about" rows="8"/>-->
 
-					</div>
-					<div class="form-group">
-						<label for="exampleFormControlFile1">Загрузите дополнительные материалы</label>
-						<input type="file" class="form-control-file" id="exampleFormControlFile1">
-					</div>
+<!--					</div>-->
+<!--					<div class="form-group">-->
+<!--						<label for="exampleFormControlFile1">Загрузите дополнительные материалы</label>-->
+<!--						<input type="file" class="form-control-file" id="exampleFormControlFile1">-->
+<!--					</div>-->
 
-					<my-button label="Сохранить" type="submit"  @click="showDialog"/>
-				</form>
+<!--					<my-button label="Сохранить" type="submit"  @click="showDialog"/>-->
+<!--				</form>-->
 
 			</div>
 		</div>
@@ -45,6 +51,7 @@ export default {
 	},
 	data() {
 		return {
+            courseTitle: '',
 			selectAnswer: '',
 			selectOptions: [
 				'Создать новый курс',
@@ -59,7 +66,11 @@ export default {
 	methods: {
 		showDialog () {
 			this.$refs.dialog.show();
-		}
+		},
+        onAdd() {
+            this.$store.dispatch("courses/createCourse", { title: this.courseTitle });
+            this.$router.push("/courses");
+        },
 	}
 }
 </script>

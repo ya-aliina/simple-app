@@ -1,6 +1,10 @@
-import {getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword} from "firebase/auth";
-
-
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    signOut,
+    updatePassword,
+} from "firebase/auth";
 
 function isValidToken(token) {
     return token !== undefined;
@@ -11,14 +15,18 @@ export default {
     state: {
         token: '',
         name: '',
-        user: { }
+        user: { },
     },
     getters: {
         isAuth(state) {
             return isValidToken(state.user.accessToken);
         },
+
         userEmail (state) {
             return state.user.email;
+        },
+        userPhoto (state) {
+            return state.user.photoURL;
         }
     },
     mutations: {
@@ -33,20 +41,17 @@ export default {
             //     return 'OK';
             // }
             // return 'error'
-
             const auth = getAuth();
 
             return signInWithEmailAndPassword(auth, data.login, data.password)
                 .then((userCredential) => {
                     context.state.user = userCredential.user;
-                    console.log('Auth user', context.state.user);
+                    // console.log('Auth user', context.state.user);
                     return 'OK';
                 })
                 .catch((error) => {
                     const errorMessage = error.message;
                     return `error: ${errorMessage}`
-                    // const errorCode = error.code;
-                    // const errorMessage = error.message;
                 });
         },
         logout(context) {

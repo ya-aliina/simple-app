@@ -21,13 +21,13 @@
                             text="Мои курсы"
                             @click="goTo('/')"
                         />
-                        <button-rectangular
-                            path="/add_lesson"
-                            src="./icons/add.png"
-                            alt="add_lesson"
-                            text="Добавить урок"
-                            @click="goTo('/add_lesson')"
-                        />
+<!--                        <button-rectangular-->
+<!--                            path="/add_lesson"-->
+<!--                            src="./icons/add.png"-->
+<!--                            alt="add_lesson"-->
+<!--                            text="Добавить урок"-->
+<!--                            @click="goTo('/add_lesson')"-->
+<!--                        />-->
                         <button-rectangular
                             path="/knowledge_base"
                             src="./icons/files.png"
@@ -58,7 +58,7 @@
                         />
                         <img
                             class="avatar"
-                            src="../assets/avatar.svg"
+                            :src="getUserPhoto()"
                             alt="avatar"
                             @click="goTo('/profile_settings')"
                         />
@@ -90,11 +90,23 @@ export default {
         doLogout() {
             this.$store.dispatch('user/logout')
         },
+        getUserPhoto () {
+            if (this.$store.getters['user/userPhoto'] == null) {
+                return require('../assets/avatar.svg')
+            } else {
+                return this.$store.getters['user/userPhoto']
+            }
+        }
     },
 }
 </script>
 
 <style scoped>
+
+.active {
+    border-bottom: 4px solid #3CB46E;
+    transition: all .15s ease;
+}
 
 .header_wrapper {
     height: 64px;
@@ -117,9 +129,6 @@ export default {
     padding-left: 25px;
 }
 
-.center {
-}
-
 .right_side {
     display: flex;
     justify-content: end;
@@ -129,7 +138,7 @@ export default {
 .button_wrapper {
     display: flex;
     justify-content: space-between;
-    max-width: 650px;
+    max-width: 480px;
     margin: 0 auto;
 }
 
@@ -150,6 +159,7 @@ export default {
 
 .avatar {
     cursor: pointer;
+    border-radius: 50%;
 }
 
 .left_wrapper {

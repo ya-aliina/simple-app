@@ -4,8 +4,8 @@
         <div class="wrapper">
             <div class="container">
                 <div class="row">
-                    <div v-for="lesson in lessonsArray" :key="lesson.id" class="col-12">
-                        <router-link :to="`/${lesson.courseName}/${lesson.courseId}/${lesson.id}`" class="router">
+                    <div v-for="lesson in lessonsById" :key="lesson.courseId" class="col-12">
+                        <router-link :to="`/${lesson.courseId}/${lesson.id}`" class="router">
                             <div class="course_item_wrapper">
                                 <div class="course_item">
                                     <img :src="getImgUrl(lesson.img)" alt="course_cover" class="course_cover">
@@ -14,7 +14,6 @@
                             </div>
                         </router-link>
                     </div>
-
                     <!--                    <div class="col-12"-->
                     <!--                         v-for="lesson in lessonsArray"-->
                     <!--                         :key="lesson.id"-->
@@ -44,6 +43,8 @@ export default {
     },
     data() {
         return {
+            courseId: '',
+            lessonsById: [],
             // lessonsArray: [
             //     {
             //         courseId: 1,
@@ -85,16 +86,27 @@ export default {
     },
     methods: {
         getImgUrl(picName) {
-            if (picName !== '') {
-                return require('../assets/' + picName);
-            }
+            // if (picName !== '') {
+            //     return require('../assets/' + picName);
+            // }
             return require('../assets/courses.png');
         },
     },
-    computed: {
-        lessonsArray() {
-            return this.$store.getters['lessons/lessonsByCourseId'](this.$route.params.id);
-        },
+    created () {
+        this.courseId = this.$route.params.id;
+
+        this.lessonsById = this.$store.getters["lessons/lessonsByCourseId"](this.courseId);
+        console.log(this.lessonsById);
+        // const editPost = postById(id);
+        // this.postText = editPost.title;
+        // this.postBody = editPost.body;
+
+        // const courseById = this.$store.getters["news/newsById"];
+        // lessonsArray() {
+        //     return this.$store.getters["courses/all"]
+        //     // console.log(this.$store.getters['lessons/lessonsByCourseId'](this.$route.params.id))
+        //     // return this.$store.getters['lessons/lessonsByCourseId'](this.$route.params.id);
+        // },
     }
 }
 

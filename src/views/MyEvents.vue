@@ -10,7 +10,7 @@
 <script>
 import Cover from "../components/Cover";
 import 'v-calendar/dist/style.css';
-import {Calendar} from 'v-calendar';
+import {Calendar, DatePicker} from 'v-calendar';
 import toggleMixin from "@/mixins/toggleMixin";
 
 export default {
@@ -19,6 +19,7 @@ export default {
     components: {
         Cover,
         Calendar,
+        DatePicker,
     }
 }
 </script>

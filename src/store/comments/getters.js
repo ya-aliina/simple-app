@@ -1,13 +1,10 @@
 export default {
     count (state) {
-        return state.courses.length;
+        return state.comments.length;
     },
     all (state) {
-        return state.courses;
+      return state.comments;
     },
-    coursesById (state) {
-        return (id) => state.courses.find(item => item.id === id);
-    }
 
 
     //TODO перенести в стор с уроками
