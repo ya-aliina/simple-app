@@ -9,8 +9,6 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
 import { getDatabase, ref, onValue } from "firebase/database";
 
-
-
 const firebaseConfig = {
 	apiKey: "AIzaSyDVxMI_zm4zbl0YbRDLgG6FaciEBTle8OE",
 	authDomain: "simple-a39bb.firebaseapp.com",
@@ -36,51 +34,18 @@ const auth = getAuth();
 
 const db = getDatabase();
 
-// const path = '/posts';
-// onValue(ref(db, path), (snapshot) => {
-// 	store.commit('posts/clear');
-// 	const postsObject = snapshot.val();
-// 	for (const [key, value] of Object.entries(postsObject)) {
-// 		store.commit('posts/addPost', value);
-// 	}
-// });
-
-
 function getData(path, stringClear, stringAdd) {
 	onValue(ref(db, path), (snapshot) => {
 		store.commit(stringClear);
 		const object = snapshot.val();
 		console.log('getData', object)
 		for (const [key, value] of Object.entries(object)) {
-
 			store.commit(stringAdd, value);
-
 		}
 	});
 }
-
 getData('/courses', 'courses/clear', 'courses/addCourse');
 getData('/lessons', 'lessons/clear', 'lessons/addLesson');
-
-
-
-
-
-// const path = '/';
-//
-// onValue(ref(db, path), (snapshot) => {
-// 	store.commit('courses/clear');
-// 	const coursesObject = snapshot.val();
-// 	// console.log( snapshot.val().courses)
-// 	// const lessonsObject = snapshot.val().lessons;
-//
-// 	for (const [key, value] of Object.entries(coursesObject)) {
-// 		store.commit('courses/addCourse', value);
-// 	}
-// 	// for (const [key, value] of Object.entries(lessonsObject)) {
-// 	// 	store.commit('lessons/addLesson', value);
-// 	// }
-// });
 
 let mounted = false;
 onAuthStateChanged(auth, (user) => {

@@ -1,16 +1,22 @@
 <template>
     <div data-vue-component="MainPage">
         <cover>Мои курсы</cover>
+
+        <!--============Верхняя панель=============-->
         <div class="control_panel_wrapper">
             <div class="container control_panel">
                 <div class="courses_available">
                     Доступно {{ this.$store.getters['courses/count'] }}
                 </div>
                 <button class="add_course_btn">
-                    <img src="../assets/add.png" alt="" class="add_course_icon">
-                    <div @click="openAddCourse">Добавить курс</div>
+<!--                    <img src="../assets/add.png" alt="" class="add_course_icon">-->
+                    <div v-if="editPage === 'false'" @click="openEditPage">Редактировать</div>
+                    <div v-if="editPage === 'true'" @click="closeEditPage">Перейти к курсам</div>
                 </button>
+
                 <my-dialog v-model:show="dialogVisible" v-model:class="animation">
+
+                    <!--============Модалка добавления курса start=============-->
                     <div v-if="addCourseModal==='true'" class="add_course_form">
                         <img src="../assets/add_course.jpg" alt="" class="add_course_img">
                         <my-input type="text" id="name" v-model="courseTitle">
@@ -20,6 +26,9 @@
                             Добавить
                         </my-button>
                     </div>
+                    <!--============Модалка добавления курса end=============-->
+
+                    <!--============Модалка редактирования start=============-->
                     <div v-if="editCourseModal==='true'" class="add_course_form">
                         <div>Редактировать</div>
                         <my-input type="text" id="name" v-model="courseTitleNew">
@@ -28,8 +37,11 @@
                         <my-button class="btn-primary add_course_form_btn" @click="onUpdate(id)">
                             Сохранить
                         </my-button>
-
                     </div>
+                    <!--============Модалка редактирования end=============-->
+
+
+                    <!--============Модалка удаления start=============-->
                     <div v-if="deleteCourseModal==='true'" class="add_course_form">
                         <div>Вы действительно хотите удалить курс?</div>
                         <my-button class="btn-primary add_course_form_btn" @click="doDelete(id)">
@@ -39,6 +51,8 @@
                             Отмена
                         </my-button>
                     </div>
+                    <!--============Модалка удаления end=============-->
+
                 </my-dialog>
             </div>
 
@@ -46,6 +60,16 @@
         <div class="wrapper">
             <div class="container">
                 <div class="row">
+
+                    <!--===================Курс start=======================-->
+                    <div v-if="editPage === 'true'" @click="openAddCourse" class="col-6 course_item_wrapper new_course_creator_wrapper">
+                        <div class="new_course_creator">
+                            <div class="course_creator_img_wrap">
+                                <img src="../assets/add_icon_l.png" alt="" class="new_course_creator_img">
+                                <div>Добавить новый курс</div>
+                            </div>
+                        </div>
+                    </div>
                     <div v-for="course in coursesArray" :key="course.id" class="col-6 course_item_wrapper">
                         <router-link :to="`/${course.id}`" class="router">
                             <div class="course_item">
@@ -53,12 +77,14 @@
                                 <div>{{ course.title }}</div>
                             </div>
                         </router-link>
-                        <div class="content-btn">
-                            <img @click="openEditCourse(course.id, course.title)" src="../assets/edit.png" alt="" class="content_icon">
-                            <img @click="openDeleteCourse(course.id)" src="../assets/delete.png" alt="" class="content_icon">
+                        <div v-if="editPage === 'true'" class="content_btn">
+                            <img @click="openEditCourse(course.id, course.title)" src="../assets/edit.png" alt=""
+                                 class="content_icon">
+                            <img @click.stop @click="openDeleteCourse(course.id)" src="../assets/delete.png" alt=""
+                                 class="content_icon">
                         </div>
                     </div>
-
+                    <!--===================Курс end=======================-->
                     <!--                    &lt;!&ndash;					<div class="col-6 course_item_wrapper"&ndash;&gt;-->
                     <!--                    &lt;!&ndash;						 v-for = "course in courseArray"&ndash;&gt;-->
                     <!--                    &lt;!&ndash;						 :key = "course.id"&ndash;&gt;-->
@@ -103,10 +129,10 @@ export default {
             id: '',
             courseTitle: '',
             courseTitleNew: '',
+            editPage: 'false',
             addCourseModal: 'false',
             editCourseModal: 'false',
             deleteCourseModal: 'false',
-
             // array: [],
             // courseArray: [
             // 	{
@@ -130,26 +156,12 @@ export default {
             // ]
         }
     },
-
     computed: {
         coursesArray() {
-            // const id = this.id;
-            // const courseById = this.$store.getters["posts/courseById"];
-            // const editPost = courseById(id);
-            // this.courseTitleNew = editPost.title;
-
-            // for (const [key, value] of Object.entries(this.$store.getters['courses/all'])) {
-            //
-            //     this.array.push(value)
-            // }
-            // console.log(this.$store.getters['courses/all'])
-            // return this.array
             return this.$store.getters["courses/all"]
         },
     },
     created() {
-
-        // this.$store.dispatch('posts/loadPosts')
     },
     methods: {
         getImgUrl(picName) {
@@ -158,52 +170,94 @@ export default {
             // }
             return require('../assets/courses.png');
         },
+        openEditPage () {
+            this.editPage = 'true';
+        },
+        closeEditPage () {
+            this.editPage = 'false';
+        },
         onAdd() {
             this.$store.dispatch("courses/createCourse", {title: this.courseTitle});
             this.hideDialog();
             this.courseTitle = '';
         },
         onUpdate(id) {
-            this.courseTitleNew = this.courseTitle;
+            // this.courseTitleNew = this.courseTitle;
             this.$store.dispatch("courses/updateCourse", {title: this.courseTitleNew, id})
             this.hideDialog()
         },
-        doDelete (id) {
-           this.$store.dispatch('courses/deleteCourse', id);
-           this.hideDialog();
+        doDelete(id) {
+            this.$store.dispatch('courses/deleteCourse', id);
+            this.hideDialog();
 
         },
         openAddCourse() {
             this.addCourseModal = 'true';
             this.editCourseModal = 'false';
-            this.deleteCourseModal ='false';
+            this.deleteCourseModal = 'false';
             this.showDialog();
         },
         openEditCourse(id, title) {
             this.id = id;
-            this.courseTitleNew = title;
             this.addCourseModal = 'false';
             this.editCourseModal = 'true';
-            this.deleteCourseModal ='false';
+            this.deleteCourseModal = 'false';
             this.showDialog();
+            this.courseTitleNew = title;
         },
         openDeleteCourse(id) {
             this.id = id;
             this.addCourseModal = 'false';
             this.editCourseModal = 'false';
-            this.deleteCourseModal ='true';
+            this.deleteCourseModal = 'true';
             this.showDialog();
         }
-
-
     },
-
 }
+
 </script>
 
 <style scoped>
+
 /deep/ .cover {
     background-image: url("../assets/cover/courses_dark.jpg");
+}
+.course_creator_img_wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #d9d9d936;
+    padding: 30px;
+    border-radius: 20px;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+.course_creator_img_wrap:hover {
+    background-color: #d9d9d978;
+}
+.new_course_creator {
+    /*height: 146px;*/
+    height: 100%;
+    /*background-color: #d9d9d936;*/
+    /*border-radius: 9px;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 500;
+    color: #a3a5a9;
+    text-decoration: none;
+    padding-bottom: 46px;
+}
+.new_course_creator_img {
+    height: 44px;
+    margin-right: 12px;
+}
+.content_btn {
+    display: flex;
+    justify-content: right;
+    margin-top: 9px;
 }
 
 .content_icon {
@@ -211,11 +265,10 @@ export default {
     margin-left: 15px;
     bottom: 0;
     right: 0;
-}
-
-.content_wrap {
-    display: flex;
-    flex-direction: column;
+    background-color: #fcfcff;
+    border-radius: 15px;
+    box-shadow: 0 1px 4px rgb(66 72 78 / 12%);
+    cursor: pointer;
 }
 
 .control_panel_wrapper {
@@ -242,9 +295,6 @@ export default {
     align-items: center;
     padding: 0 20px;
     margin-right: 20px;
-
-    /*color: #8d98a2;*/
-    /*background-color: #fff;*/
 }
 
 .add_course_btn {
@@ -276,7 +326,6 @@ export default {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
 }
 
 .add_course_img {
@@ -286,7 +335,6 @@ export default {
 
 .wrapper {
     background: #f1f4f6;
-
     padding-bottom: 30px;
 }
 
@@ -308,7 +356,6 @@ export default {
 .course_item:hover {
     transition: all 0.5s 0s ease;
     transform: scale(1.04)
-    /*transform: translate(0px, -10px);*/
 }
 
 .course_item div {
@@ -318,7 +365,6 @@ export default {
     color: #42484e;
     text-decoration: none;
 }
-
 
 .course_cover {
     border-radius: 4px;
@@ -334,5 +380,4 @@ export default {
     transition: all 0.5s 0s ease;
     transform: translate(0px, -23px);
 }
-
 </style>
