@@ -3,7 +3,7 @@
         <div class="container">
            <div class="row align-items-center">
                <div class="col-6">
-                   <h1>Simple помогает эффективно обучать и обучаться.</h1>
+                   <div class="main-title">Simple помогает эффективно обучать и обучаться.</div>
                    <div class="text">
                        Учитесь дистанционно, создавайте курсы и выводите знания на новый уровень
                        собственным уникальным способом вместе с Simple.
@@ -22,10 +22,10 @@
                    <my-dialog v-model:show="dialogVisible" v-model:class="animation">
                        <div class="registration-form">
                            <div class="login" v-if="showLogin">
-                               <img src="../assets/login-cover.png" alt="" class="img_login" >
+                               <img src="../assets/login-cover.jpg" alt="" class="img_login" >
                                <div class="title">Добро пожаловать!</div>
-                               <my-input placeholder="Укажите логин" v-model="login" id="login" type="text" class="form-control-lg input"/>
-                               <my-input placeholder="Введите пароль" v-model="password" id="password" type="password" class="form-control-lg input"/>
+                               <my-input placeholder="Укажите логин" v-model="login" id="login" type="text" class="form-control input"/>
+                               <my-input placeholder="Введите пароль" v-model="password" id="password" type="password" class="form-control input"/>
                                <my-button class="button btn-primary" @click="onAuthClick">Войти</my-button>
                                <div class="auth">
                                    <div>Впервые на Simple?</div>
@@ -140,21 +140,22 @@ export default {
 
 <style scoped>
     .wrapper1 {
-        /*top: 0;*/
-        /*bottom: 0;*/
-        /*left: 0;*/
-        /*right: 0;*/
         background: #eae6ff;
         background: -webkit-gradient(linear, left bottom, left top, from(#fff), to(#eae6ff));
         background: linear-gradient(0deg, #fff, #eae6ff 100%);
-        /*position: fixed;*/
         display: flex;
-        min-height: 86vh;
+        min-height: 84vh;
         align-items: center;
     }
     img {
-        width: 100%;
+        width: 90%;
         height: auto;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .main-title {
+        font-size: 30px;
+        font-weight: 600;
     }
     .text {
         margin-top: 0;
@@ -164,7 +165,7 @@ export default {
         margin-block-end: 1em;
         margin-inline-start: 0;
         margin-inline-end: 0;
-        font-size: 22px;
+        font-size: 18px;
         font-weight: 400;
         line-height: 1.5;
         color: #091e42;
@@ -174,7 +175,7 @@ export default {
         margin-top: 43px;
         color: #056efd;
         /*color: #305ea3;*/
-        font-size: 27px;
+        font-size: 22px;
         font-weight: 700;
     }
 
@@ -189,33 +190,37 @@ export default {
     .registration-form {
         margin: auto;
         min-height: 58px;
-        width: 544px;
+        width: 450px;
         padding: 10px 65px;
+        display: flex;
 
+        flex-direction: column;
     }
     .img_login {
         width: 100%;
         height: auto;
         align-content: center;
-        margin-bottom: 40px;
+        margin-bottom: 10px;
         justify-content: center;
     }
 
     .title {
-        margin-left: 70px;
+        display: flex;
+        width: 100%;
+        justify-content: center;
         margin-bottom: 25px;
         font-family: Roboto, sans-serif;
-        font-size: 28px;
+        font-size: 20px;
         font-weight: 600;
         line-height: 1.18;
         color: #2f3337;
     }
     .button {
         width: 100% !important;
-        height: 50px;
+        height: 37px;
         margin-top: 20px;
-        font-size: 22px;
-        /*font-weight: 700;*/
+        font-size: 17px;
+        font-weight: 600;
     }
 
     .input {
@@ -227,7 +232,7 @@ export default {
         display: flex;
         margin-top: 20px;
         justify-content: space-between;
-        font-size: 15px;
+        font-size: 13px;
     }
 
     .link-auth {

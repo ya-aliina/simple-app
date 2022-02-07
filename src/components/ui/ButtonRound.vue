@@ -33,8 +33,8 @@ export default {
 .user_notification_item {
 	cursor: pointer;
 	display: flex;
-	width: 36px;
-	height: 36px;
+	width: 34px;
+	height: 34px;
 	justify-content: center;
 	align-items: center;
 	background: rgba(66, 72, 78, 0.08);

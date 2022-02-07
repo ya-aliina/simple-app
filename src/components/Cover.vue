@@ -29,7 +29,7 @@ export default {
 
 <style scoped>
 .cover {
-    height: 160px;
+    height: 130px;
     background-repeat: no-repeat;
     background-position: 50%;
     background-size: cover;
@@ -48,7 +48,7 @@ export default {
 .text_wrapper {
     display: flex;
     align-items: flex-end;
-    height: 160px;
+    height: 130px;
     top: 0;
     z-index: 2500;
 
@@ -56,7 +56,7 @@ export default {
 
 .text {
     font-family: Roboto, sans-serif;
-    font-size: 36px;
+    font-size: 30px;
     font-weight: 500;
     padding: 0 30px 46px;
     color: #fff;

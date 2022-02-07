@@ -15,7 +15,7 @@
 import Header from "@/components/Header";
 import Main from "@/components/Main";
 import Footer from "@/components/Footer";
-import MainAuth from "@/components/MainAuth";
+import MainAuth from "@/views/MainAuth";
 
 export default {
 	components: {

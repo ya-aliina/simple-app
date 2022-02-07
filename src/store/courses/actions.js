@@ -27,7 +27,6 @@ export default {
         updates['courses/' + id] = null;
         const db = getDatabase();
         return update(ref(db), updates);
-
     }
 
 }

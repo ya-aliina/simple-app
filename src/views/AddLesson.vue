@@ -77,6 +77,6 @@ export default {
 
 <style scoped>
 /deep/ .cover {
-	background-image: url("../assets/cover/add_lesson_dark.jpg");
+	background-image: url("../assets/cover/lesson_page_dark.jpg");
 }
 </style>

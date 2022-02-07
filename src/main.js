@@ -38,7 +38,6 @@ function getData(path, stringClear, stringAdd) {
 	onValue(ref(db, path), (snapshot) => {
 		store.commit(stringClear);
 		const object = snapshot.val();
-		console.log('getData', object)
 		for (const [key, value] of Object.entries(object)) {
 			store.commit(stringAdd, value);
 		}

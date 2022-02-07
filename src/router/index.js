@@ -6,8 +6,8 @@ import MyEvents from "@/views/MyEvents";
 import Messages from "@/views/Messages";
 import Notifications from "@/views/Notifications";
 import ProfileSettings from "@/views/ProfileSettings";
-import CourseForm from "@/components/CourseForm";
-import LessonForm from "@/components/LessonForm";
+import CourseForm from "@/views/ListOfLessons";
+import LessonForm from "@/views/Lesson";
 
 const routes = [
   {

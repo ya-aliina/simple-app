@@ -53,7 +53,7 @@
 		cursor: pointer;
 		align-items: center;
 		padding: 0 7px;
-		height: 64px;
+		height: 55px;
 		border: 4px solid #ffffff;
 		transition: all .15s ease;
 		/*height: 60px;*/

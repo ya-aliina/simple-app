@@ -1,6 +1,5 @@
 <template>
-	<div class="wrapper">
-
+	<div class="my_input_wrapper">
 			<label for="id"><slot></slot></label>
 
 			<input class="form-control"
@@ -65,7 +64,7 @@ export default {
 </script>
 
 <style scoped>
-.wrapper {
+.my_input_wrapper {
     display: flex;
 	padding-top: 20px;
     background: white;

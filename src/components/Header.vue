@@ -109,7 +109,7 @@ export default {
 }
 
 .header_wrapper {
-    height: 64px;
+    height: 55px;
     box-shadow: 0 4px 12px 0 rgba(0, 0, 0, .12);
     /*background: #FFFFFF;*/
     background: rgba(245, 245, 245) 0.75;
@@ -118,7 +118,7 @@ export default {
 }
 
 .row {
-    height: 64px;
+    height: 55px;
     display: flex;
     align-items: center;
 }
@@ -173,8 +173,8 @@ export default {
 }
 
 .avatar {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
 }
 
 </style>

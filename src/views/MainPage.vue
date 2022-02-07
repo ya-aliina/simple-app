@@ -8,6 +8,7 @@
                 <div class="courses_available">
                     Доступно {{ this.$store.getters['courses/count'] }}
                 </div>
+
                 <button class="add_course_btn">
 <!--                    <img src="../assets/add.png" alt="" class="add_course_icon">-->
                     <div v-if="editPage === 'false'" @click="openEditPage">Редактировать</div>
@@ -17,24 +18,24 @@
                 <my-dialog v-model:show="dialogVisible" v-model:class="animation">
 
                     <!--============Модалка добавления курса start=============-->
-                    <div v-if="addCourseModal==='true'" class="add_course_form">
+                    <div v-if="addCourseModal==='true'" class="add_lesson_form">
                         <img src="../assets/add_course.jpg" alt="" class="add_course_img">
                         <my-input type="text" id="name" v-model="courseTitle">
                             Название курса:
                         </my-input>
-                        <my-button class="btn-primary add_course_form_btn" @click="onAdd">
+                        <my-button class="btn-primary add_course_form_btn" @click="doAdd">
                             Добавить
                         </my-button>
                     </div>
                     <!--============Модалка добавления курса end=============-->
 
                     <!--============Модалка редактирования start=============-->
-                    <div v-if="editCourseModal==='true'" class="add_course_form">
+                    <div v-if="editCourseModal==='true'" class="add_lesson_form">
                         <div>Редактировать</div>
                         <my-input type="text" id="name" v-model="courseTitleNew">
                             Название курса:
                         </my-input>
-                        <my-button class="btn-primary add_course_form_btn" @click="onUpdate(id)">
+                        <my-button class="btn-primary add_course_form_btn" @click="doUpdate(id)">
                             Сохранить
                         </my-button>
                     </div>
@@ -42,7 +43,7 @@
 
 
                     <!--============Модалка удаления start=============-->
-                    <div v-if="deleteCourseModal==='true'" class="add_course_form">
+                    <div v-if="deleteCourseModal==='true'" class="add_lesson_form">
                         <div>Вы действительно хотите удалить курс?</div>
                         <my-button class="btn-primary add_course_form_btn" @click="doDelete(id)">
                             Удалить
@@ -73,8 +74,15 @@
                     <div v-for="course in coursesArray" :key="course.id" class="col-6 course_item_wrapper">
                         <router-link :to="`/${course.id}`" class="router">
                             <div class="course_item">
-                                <img :src="getImgUrl()" alt="course_cover" class="course_cover">
-                                <div>{{ course.title }}</div>
+                                <div class="course_img_wrapper">
+                                    <img :src="getImgUrl()" alt="course_cover" class="course_cover">
+                                </div>
+                                <div class="course_text_wrapper">
+                                    <div>{{ course.title }}</div>
+                                    <div class="lessons_available">
+                                        {{  getTheAmountOfLessons(course.id) }}
+                                    </div>
+                                </div>
                             </div>
                         </router-link>
                         <div v-if="editPage === 'true'" class="content_btn">
@@ -85,18 +93,7 @@
                         </div>
                     </div>
                     <!--===================Курс end=======================-->
-                    <!--                    &lt;!&ndash;					<div class="col-6 course_item_wrapper"&ndash;&gt;-->
-                    <!--                    &lt;!&ndash;						 v-for = "course in courseArray"&ndash;&gt;-->
-                    <!--                    &lt;!&ndash;						 :key = "course.id"&ndash;&gt;-->
-                    <!--                    &lt;!&ndash;					>&ndash;&gt;-->
-                    <!--                    &lt;!&ndash;						<router-link :to="`/${course.name}/${course.id}`" class="router">&ndash;&gt;-->
-                    <!--                    &lt;!&ndash;							<div class="course_item">&ndash;&gt;-->
-                    <!--                    &lt;!&ndash;								<img :src="getImgUrl(course.img)" alt="course_cover" class="course_cover">&ndash;&gt;-->
-                    <!--                    &lt;!&ndash;								<div>{{course.title}}</div>&ndash;&gt;-->
-                    <!--                    &lt;!&ndash;							</div>&ndash;&gt;-->
-                    <!--                    &lt;!&ndash;						</router-link>&ndash;&gt;-->
-                    <!--                    &lt;!&ndash;					</div>&ndash;&gt;-->
-                </div>
+               </div>
             </div>
         </div>
         <!--        <div class="wrapper">-->
@@ -133,27 +130,6 @@ export default {
             addCourseModal: 'false',
             editCourseModal: 'false',
             deleteCourseModal: 'false',
-            // array: [],
-            // courseArray: [
-            // 	{
-            // 		id: 1,
-            //         name:'business_english',
-            // 		title: 'Business English',
-            // 		img: '',
-            // 	},
-            // 	{
-            // 		id: 2,
-            //         name:'excel_basic_course',
-            // 		title: 'Excel. Базовый курс',
-            // 		img: '',
-            // 	},
-            // 	{
-            // 		id: 3,
-            //         name:'power_point_basic_course',
-            // 		title: 'PowerPoint. Базовый курс',
-            // 		img: '',
-            // 	},
-            // ]
         }
     },
     computed: {
@@ -170,26 +146,52 @@ export default {
             // }
             return require('../assets/courses.png');
         },
+        getTheAmountOfLessons (id) {
+            let amountOfLessons = this.$store.getters["lessons/lessonsByCourseId"](id).length;
+            let lessonsWord = '';
+            if ((amountOfLessons % 100 >=0) && (amountOfLessons % 100 <= 19)) {
+                if (amountOfLessons === 0) {
+                    return 'Уроков еще нет'
+                } else if (amountOfLessons % 100 === 0 ) {
+                    lessonsWord = 'уроков';
+                } else if (amountOfLessons % 100 === 1 ) {
+                    lessonsWord = 'урок';
+                } else if ((amountOfLessons % 100 >= 2) && (amountOfLessons % 100 <= 4)) {
+                    lessonsWord = 'урока';
+                } else {
+                    lessonsWord = 'уроков';
+                }
+            }
+            //от 20 до 99 в каждой сотне
+            else if (amountOfLessons % 10 === 0) {
+                lessonsWord = 'уроков';
+            } else if (amountOfLessons % 10 === 1) {
+                lessonsWord = 'урок';
+            } else if ((amountOfLessons % 10 >= 2) && (amountOfLessons % 10 <= 4)) {
+                lessonsWord = 'урока';
+            } else {
+                lessonsWord = 'уроков';
+            }
+            return `${amountOfLessons} ${lessonsWord}`
+        },
         openEditPage () {
             this.editPage = 'true';
         },
         closeEditPage () {
             this.editPage = 'false';
         },
-        onAdd() {
+        doAdd() {
             this.$store.dispatch("courses/createCourse", {title: this.courseTitle});
             this.hideDialog();
             this.courseTitle = '';
         },
-        onUpdate(id) {
-            // this.courseTitleNew = this.courseTitle;
+        doUpdate(id) {
             this.$store.dispatch("courses/updateCourse", {title: this.courseTitleNew, id})
             this.hideDialog()
         },
         doDelete(id) {
             this.$store.dispatch('courses/deleteCourse', id);
             this.hideDialog();
-
         },
         openAddCourse() {
             this.addCourseModal = 'true';
@@ -221,6 +223,22 @@ export default {
 
 /deep/ .cover {
     background-image: url("../assets/cover/courses_dark.jpg");
+}
+.course_text_wrapper {
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.course_img_wrapper {
+    width: 40%;
+    height: auto;
+    padding: 0;
+}
+.lessons_available {
+    font-size: 15px !important;
+    color: #8d98a2 !important;
+    font-weight: 400 !important;
 }
 .course_creator_img_wrap {
     display: flex;
@@ -259,9 +277,8 @@ export default {
     justify-content: right;
     margin-top: 9px;
 }
-
 .content_icon {
-    width: 35px;
+    width: 30px;
     margin-left: 15px;
     bottom: 0;
     right: 0;
@@ -270,54 +287,48 @@ export default {
     box-shadow: 0 1px 4px rgb(66 72 78 / 12%);
     cursor: pointer;
 }
-
 .control_panel_wrapper {
     background: #fff;
-    height: 68px;
+    height: 55px;
     display: flex;
     align-items: center;
 }
-
 .control_panel {
     display: flex;
 }
-
 .courses_available {
     color: #42484e;
     border-radius: 18px;
     background-color: #efeff0;
     width: 150px;
-    height: 36px;
+    height: 30px;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0 20px;
     margin-right: 20px;
 }
-
 .add_course_btn {
     background: none;
     border-radius: 18px;
     border: 2px solid #898e956b;
-    height: 36px;
+    height: 30px;
     color: #42484e;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 15px;
     padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 .add_course_icon {
     width: 22px;
     height: 22px;
     margin-right: 15px;
 }
-
-.add_course_form {
+.add_lesson_form {
     margin: auto;
     min-height: 58px;
     width: 544px;
@@ -327,55 +338,45 @@ export default {
     align-items: center;
     flex-direction: column;
 }
-
 .add_course_img {
     width: 300px;
     height: auto;
 }
-
 .wrapper {
     background: #f1f4f6;
     padding-bottom: 30px;
 }
-
 .course_item_wrapper {
     margin-top: 30px;
 }
-
 .course_item {
     cursor: pointer;
     display: flex;
-    padding: 28px;
+    padding: 23px;
     border-radius: 6px;
     background: #fff;
     box-shadow: 0 1px 4px rgba(66, 72, 78, .12);
     text-decoration: none;
     transition: all 0.5s 0s ease;
 }
-
 .course_item:hover {
     transition: all 0.5s 0s ease;
     transform: scale(1.04)
 }
-
 .course_item div {
-    padding-left: 20px;
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 500;
     color: #42484e;
     text-decoration: none;
 }
-
 .course_cover {
     border-radius: 4px;
-    width: 40%;
+    width: 100%;
     height: auto;
 }
-
 .router {
     text-decoration: none;
 }
-
 .router:hover {
     transition: all 0.5s 0s ease;
     transform: translate(0px, -23px);

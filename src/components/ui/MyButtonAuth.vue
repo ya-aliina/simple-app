@@ -15,23 +15,23 @@ export default {
 
 <style scoped>
 .butn {
-    /*background: #fff;*/
-    /*border: 2px solid #555;*/
+    /* background: #fff; */
+    /* border: 2px solid #555; */
     background: #056efd;
     border: 2px solid #056efd;
     border-radius: 30px;
     box-sizing: border-box;
-    /*color: #555;*/
+    /* color: #555; */
     color: #ffffff;
     display: inline-block;
-    font: 600 20px Roboto,tahoma,arial;
+    font: 600 19px Roboto,tahoma,arial;
     line-height: 1.286;
-    padding: 16px 37px;
+    padding: 8px 30px;
     position: relative;
     text-align: center;
     text-decoration: none;
     vertical-align: middle;
-    transition: all .15s ease
+    transition: all .15s ease;
 
 }
 

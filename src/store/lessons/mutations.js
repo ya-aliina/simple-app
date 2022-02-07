@@ -3,6 +3,6 @@ export default {
         state.lessons.push(data);
     },
     clear(state) {
-        state.courses = [];
+        state.lessons = [];
     }
 }
