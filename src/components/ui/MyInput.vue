@@ -1,15 +1,16 @@
 <template>
-	<div class="my_input_wrapper">
-			<label for="id"><slot></slot></label>
-
-			<input class="form-control"
+    <div class="row">
+        <div class="my_input_wrapper">
+<!--            <label for="id">{{label}}</label>-->
+            <input class="form-control"
                    :class="class"
                    :type="type"
                    :placeholder="placeholder"
                    :id="id"
                    v-model="inputValue"
             >
-	</div>
+        </div>
+    </div>
 </template>
 
 <script>

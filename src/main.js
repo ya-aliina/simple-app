@@ -38,6 +38,7 @@ function getData(path, stringClear, stringAdd) {
 	onValue(ref(db, path), (snapshot) => {
 		store.commit(stringClear);
 		const object = snapshot.val();
+		console.log(object)
 		for (const [key, value] of Object.entries(object)) {
 			store.commit(stringAdd, value);
 		}
@@ -45,6 +46,7 @@ function getData(path, stringClear, stringAdd) {
 }
 getData('/courses', 'courses/clear', 'courses/addCourse');
 getData('/lessons', 'lessons/clear', 'lessons/addLesson');
+getData('/calendar', 'calendar/clear', 'calendar/addEvent');
 
 let mounted = false;
 onAuthStateChanged(auth, (user) => {

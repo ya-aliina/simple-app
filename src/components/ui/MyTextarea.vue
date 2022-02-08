@@ -1,8 +1,11 @@
 <template>
-<div class="row">
 	<label class="col-4" for="exampleFormControlTextarea1">{{label}}</label>
-	<textarea class="form-control col-8" id="exampleFormControlTextarea1" :rows="rows" v-model="inputValue"></textarea>
-</div>
+	<textarea
+        class="form-control col-8"
+        id="exampleFormControlTextarea1"
+        :placeholder="placeholder"
+        :rows="rows"
+        v-model="inputValue"></textarea>
 
 </template>
 
@@ -18,7 +21,6 @@ export default {
 	props: {
 		modelValue: {
 			type: String,
-			default: null,
 		},
 		label: {
 			type: String,
@@ -26,12 +28,18 @@ export default {
 		},
 		rows: {
 			type: String,
-			default: '6',
 		},
+        placeholder: {
+            type: String,
+            default: null,
+        },
 	},
 	watch: {
-		modelValue () {
-			this.inputValue = this.modelValue;
+		modelValue: {
+		    handler() {
+                this.inputValue = this.modelValue;
+            },
+            immediate: true,
 		},
 		inputValue () {
 			this.$emit('update:modelValue', this.inputValue);

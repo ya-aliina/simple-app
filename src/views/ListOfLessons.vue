@@ -84,7 +84,6 @@
                         </div>
                         <!--============Модалка редактирования end=============-->
 
-
                         <!--============Модалка удаления start=============-->
                         <div v-if="deleteLessonModal==='true'" class="add_lesson_form">
                             <div>Вы действительно хотите удалить урок?</div>
@@ -152,6 +151,7 @@ export default {
         },
         getLessons () {
             this.courseId = this.$route.params.id;
+            console.log(this.courseId)
             this.lessonsById = this.$store.getters["lessons/lessonsByCourseId"](this.courseId);
             return this.lessonsById
         },
@@ -194,7 +194,7 @@ export default {
         },
         doUpdate(id) {
             this.$store.dispatch("lessons/updateLesson", {
-                title: this.lessonTitleNew,
+                title: this.lessonTitle,
                 id,
                 courseId: this.courseId,
             })
