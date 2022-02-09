@@ -31,17 +31,6 @@
                     <div class="text">На Simple вы:</div>
                     <my-select :options="selectOptions" v-model:selected="answerSelect"/>
                 </div>
-
-                <div class="title">Изменить пароль</div>
-                <my-input-for-settings type="password" id="currentPassword" v-model="currentPassword">
-                    Введите текущий пароль:
-                </my-input-for-settings>
-                <my-input-for-settings type="password" id="newPassword" v-model="newPassword">
-                    Введите новый пароль:
-                </my-input-for-settings>
-                <my-input-for-settings type="password" id="newPasswordCopy" v-model="newPasswordCopy">
-                    Повторите пароль:
-                </my-input-for-settings>
                 <my-checkbox v-model="mailNotifications" label="Получать уведомления на почту"/>
                 <div class="button_wrapper even_level">
                     <my-button class="btn-primary">
@@ -113,9 +102,6 @@ export default {
             } else {
                 return this.$store.getters['user/userPhoto']
             }
-        },
-        checkCurrentPassword() {
-
         },
     }
 }
