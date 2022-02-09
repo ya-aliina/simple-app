@@ -3,7 +3,6 @@ import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     signOut,
-    updatePassword,
 } from "firebase/auth";
 
 function isValidToken(token) {
@@ -27,7 +26,10 @@ export default {
         },
         userPhoto (state) {
             return state.user.photoURL;
-        }
+        },
+        userName (state) {
+            return state.user.name;
+        },
     },
     mutations: {
         setAuthUser(state, data) {

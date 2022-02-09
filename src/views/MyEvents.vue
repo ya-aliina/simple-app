@@ -55,11 +55,10 @@
                             <img @click="openEditEvent(todo.id, todo.date, todo.description, todo.fullDescription )"
                                  src="../assets/edit.png" alt=""
                                  class="event_action_img">
-                            <img @click="openDeleteEvent(todo.id)"
+                            <img v-if="editFormCalendar === 'true'" @click="openDeleteEvent(todo.id)"
                                  src="../assets/delete.png" alt=""
                                  class="event_action_img">
                         </div>
-
                     </div>
                     <div class="event_item">
                         <div class="event_item_title">Время</div>
@@ -99,7 +98,7 @@
 
 <script>
 import Cover from "../components/Cover";
-import MyDatePicker from "../components/ui/MyDatePicker";
+// import MyDatePicker from "../components/ui/MyDatePicker";
 import {Calendar, DatePicker} from 'v-calendar';
 import 'v-calendar/dist/style.css';
 
@@ -117,6 +116,7 @@ export default {
     data() {
         let todos = [];
         return {
+            user: this.$store.getters['user/userEmail'],
             todayActive: new Date(),
             date: new Date(),
             incId: todos.length,
@@ -128,12 +128,10 @@ export default {
             editorBtnVisible: 'false',
             editFormCalendar: 'false'
         };
-
     },
     methods: {
-
         getEvents() {
-            this.todos = this.$store.getters["calendar/all"]
+            this.todos = this.$store.getters["calendar/calendarByUser"](this.user);
             console.log(this.todos)
         },
         getEventDate(date) {
@@ -163,9 +161,9 @@ export default {
         },
         addNewEvent() {
             let date = this.newDate
-            console.log(date)
             this.$store.dispatch("calendar/createEvent", {
                 color: 'red',
+                user: this.user,
                 date: Date.parse(date),
                 description: this.newEvent,
                 fullDescription: this.newEventDescription,
@@ -179,15 +177,13 @@ export default {
             this.$store.dispatch("calendar/updateEvent", {
                 id: id,
                 color: 'red',
+                user: this.user,
                 date: Date.parse(date),
                 description: this.newEvent,
                 fullDescription: this.newEventDescription,
                 isComplete: false,
             });
             this.doClearFields()
-            // this.newDate = new Date();
-            // this.newEvent = '';
-            // this.newEventDescription = ''
             this.editorBtnVisible = 'false'
         },
         doClearFields() {
@@ -223,7 +219,7 @@ export default {
     },
     computed: {
         attributes() {
-            this.todos = this.$store.getters["calendar/all"]
+            this.todos = this.$store.getters["calendar/calendarByUser"](this.user)
             return [
                 ...this.todos.map(todo => ({
                     dates: todo.date,
@@ -325,6 +321,26 @@ export default {
     /*border-radius: .5rem;*/
     height: 100%;
 }
+/deep/ .vc-weeks {
+    position: unset;
+}
+
+/*/deep/ .vc-day {*/
+/*    position: unset;*/
+/*    z-index: auto;*/
+/*}*/
+/deep/ .vc-weekday {
+    text-align: center;
+    position: unset;
+}
+/deep/ .vc-pane-container {
+    position: unset;
+}
+/deep/ .vc-day-content {
+    position: unset;
+}
+
+
 
 
 </style>

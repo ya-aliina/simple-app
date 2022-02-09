@@ -28,12 +28,6 @@ export default {
 }
 </script>
 
-
-
-
-
-
-
 <style scoped>
 .dialog {
     /*top: 0;*/

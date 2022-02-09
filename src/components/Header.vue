@@ -21,13 +21,6 @@
                             text="Мои курсы"
                             @click="goTo('/')"
                         />
-<!--                        <button-rectangular-->
-<!--                            path="/add_lesson"-->
-<!--                            src="./icons/add.png"-->
-<!--                            alt="add_lesson"-->
-<!--                            text="Добавить урок"-->
-<!--                            @click="goTo('/add_lesson')"-->
-<!--                        />-->
                         <button-rectangular
                             path="/knowledge_base"
                             src="./icons/files.png"

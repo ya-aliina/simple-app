@@ -3,10 +3,8 @@
         <cover/>
         <div class="avatar_wrapper">
             <img :src="getUserPhoto()" class="avatar" alt="">
-<!--            <img src="@/assets/avatar.svg" alt="user_avatar" class="avatar">-->
             <div class="user_login">{{$store.getters['user/userEmail']}}</div>
         </div>
-        <div @click="debug ()">click</div>
         <div class="container">
             <div class="form ">
                 <div class="title">Настройки аккаунта</div>
@@ -25,11 +23,16 @@
                 <my-input-for-settings type="text" id="about" v-model="about">
                     О себе:
                 </my-input-for-settings>
+                <div class="d-flex wrap">
+                    <div class="text">Пол</div>
+                    <my-radio :options="radioOptions" v-model:selected="answerRadio" />
+                </div>
+                <div class="d-flex">
+                    <div class="text">На Simple вы:</div>
+                    <my-select :options="selectOptions" v-model:selected="answerSelect"/>
+                </div>
+
                 <div class="title">Изменить пароль</div>
-<!--                <div login_wrapper>-->
-<!--                    <div class="login_title"></div>-->
-<!--                    -->
-<!--                </div>-->
                 <my-input-for-settings type="password" id="currentPassword" v-model="currentPassword">
                     Введите текущий пароль:
                 </my-input-for-settings>
@@ -41,8 +44,12 @@
                 </my-input-for-settings>
                 <my-checkbox v-model="mailNotifications" label="Получать уведомления на почту"/>
                 <div class="button_wrapper even_level">
-                    <my-button class="btn-primary" @click="checkCurrentPassword">Сохранить</my-button>
-                    <button @click="showDialog" type="button" class="btn btn-outline-primary" >Выйти</button>
+                    <my-button class="btn-primary">
+                        Сохранить
+                    </my-button>
+                    <button @click="showDialog" type="button" class="btn btn-outline-primary" >
+                        Выйти
+                    </button>
                 </div>
                 <my-dialog v-model:show="dialogVisible" v-model:class="animation">
                     <div class="message_confirmation">Вы действительно хотите выйти?</div>
@@ -82,6 +89,16 @@ export default {
             newPassword: '',
             newPasswordCopy: '',
             mailNotifications: false,
+            radioOptions: [
+                'М',
+                'Ж',
+            ],
+            answerRadio: '',
+            selectOptions: [
+                'Ученик',
+                'Преподаватель',
+            ],
+            answerSelect: '',
 
         }
     },
@@ -89,9 +106,6 @@ export default {
         doLogout() {
             this.$store.dispatch('user/logout')
             this.goTo('/authorization')
-        },
-        debug () {
-            console.log(this.$store.getters['user/userPhoto'])
         },
         getUserPhoto () {
             if (this.$store.getters['user/userPhoto'] == null) {
@@ -103,22 +117,6 @@ export default {
         checkCurrentPassword() {
 
         },
-        checkNewPassword() {
-
-        },
-        changePassword () {
-            const auth = getAuth();
-            const user = auth.currentUser;
-            const newPassword = this.newPassword;
-
-            updatePassword(user, newPassword).then((status) => {
-                return alert('Пароль изменен')
-            }).catch((error) => {
-                return alert('Произошла ошибка при смене пароля')
-            });
-
-        }
-
     }
 }
 </script>
@@ -181,6 +179,13 @@ export default {
 
 .even_level {
     margin-right: 15px;
+}
+.text {
+    margin-right: 20px;
+    width: 150px;
+}
+.wrap {
+    margin-top: 20px;
 }
 
 .btn {

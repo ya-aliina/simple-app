@@ -15,6 +15,23 @@
 				activePath: '/',
 			}
 		},
+        props: {
+            src: {
+                type: String,
+                default: './icons/add.png'
+            },
+            alt: {
+                type: String,
+                default: 'icon'
+            },
+            text: {
+                type: String,
+                default: 'Новая кнопка'
+            },
+            path: {
+                type: String,
+            }
+        },
 		methods: {
 			isActive(activePath) {
 				if (activePath === this.path) {
@@ -25,23 +42,6 @@
 		watch: {
 			$route () {
 				this.activePath = this.$route.path;
-			}
-		},
-		props: {
-			src: {
-				type: String,
-				default: './icons/add.png'
-			},
-			alt: {
-				type: String,
-				default: 'icon'
-			},
-			text: {
-				type: String,
-				default: 'Новая кнопка'
-			},
-			path: {
-				type: String,
 			}
 		},
 	}

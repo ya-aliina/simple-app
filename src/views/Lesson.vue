@@ -79,6 +79,12 @@ export default {
             lessonContent: '',
         }
     },
+    created() {
+        this.id = this.$route.params.idLesson;
+        const lessonById = this.$store.getters["lessons/lessonsById"];
+        this.lesson = lessonById(this.id)[0]
+        this.courseId = this.$route.params.id
+    },
     methods: {
         getLesson() {
             this.courseId = this.$route.params.id;
@@ -105,12 +111,6 @@ export default {
             this.getLesson()
         },
     },
-    created() {
-        this.id = this.$route.params.idLesson;
-        const lessonById = this.$store.getters["lessons/lessonsById"];
-        this.lesson = lessonById(this.id)[0]
-        this.courseId = this.$route.params.id
-    }
 }
 
 </script>

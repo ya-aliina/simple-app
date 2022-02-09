@@ -41,7 +41,6 @@
                     </div>
                     <!--============Модалка редактирования end=============-->
 
-
                     <!--============Модалка удаления start=============-->
                     <div v-if="deleteCourseModal==='true'" class="add_lesson_form">
                         <div>Вы действительно хотите удалить курс?</div>
@@ -53,15 +52,12 @@
                         </my-button>
                     </div>
                     <!--============Модалка удаления end=============-->
-
                 </my-dialog>
             </div>
-
         </div>
         <div class="wrapper">
             <div class="container">
                 <div class="row">
-
                     <!--===================Курс start=======================-->
                     <div v-if="editPage === 'true'" @click="openAddCourse" class="col-6 course_item_wrapper new_course_creator_wrapper">
                         <div class="new_course_creator">

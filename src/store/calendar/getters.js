@@ -5,6 +5,11 @@ export default {
     all(state) {
         return state.calendar;
     },
+    calendarByUser(state) {
+        return (user) => state.calendar.filter((event) => {
+            return  event.user == user;
+        })
+    },
     // lessonsByCourseId(state) {
     //     return (courseId) => state.lessons.filter((lesson) => {
     //         return  lesson.courseId == courseId;

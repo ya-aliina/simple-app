@@ -10,10 +10,10 @@ import toggleMixin from "@/mixins/toggleMixin";
 
 export default {
 	name: "Main",
+    mixins: [toggleMixin],
 	components: {
 		Cover
 	},
-    mixins: [toggleMixin],
 }
 </script>
 

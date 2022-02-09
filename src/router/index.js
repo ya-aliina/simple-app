@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import MainPage from "@/views/MainPage";
-import AddLesson from "@/views/AddLesson";
 import KnowledgeBase from "@/views/KnowledgeBase";
 import MyEvents from "@/views/MyEvents";
 import Messages from "@/views/Messages";
@@ -45,18 +44,6 @@ const routes = [
     path: '/:id/:idLesson',
     name: 'lessonForm',
     component: LessonForm,
-    beforeEnter (to, from, next) {
-      if (store.getters['user/isAuth']) {
-        next();
-      } else {
-        next('/authorization');
-      }
-    }
-  },
-  {
-    path: '/add_lesson',
-    name: 'AddLesson',
-    component: AddLesson,
     beforeEnter (to, from, next) {
       if (store.getters['user/isAuth']) {
         next();

@@ -129,6 +129,9 @@ export default {
             lessonContent: [],
         }
     },
+    created() {
+        this.getLessons ()
+    },
     methods: {
         getImgUrl(picName) {
             // if (picName !== '') {
@@ -207,9 +210,6 @@ export default {
             this. getLessons();
         },
     },
-    created() {
-        this.getLessons ()
-    }
 }
 
 </script>

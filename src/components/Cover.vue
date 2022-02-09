@@ -23,7 +23,6 @@ export default {
             default: 'Заголовок'
         }
     }
-
 }
 </script>
 

@@ -22,10 +22,6 @@ export default {
 		}
 	},
 	props: {
-		// placeholder: {
-		// 	type: String,
-		// 	default: '',
-		// },
 		modelValue: {
 			type: String,
 			default: null
