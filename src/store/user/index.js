@@ -9,6 +9,7 @@ import {
 function isValidToken(token) {
     return token !== undefined;
 }
+
 export default {
     namespaced: true,
     state: {
@@ -20,6 +21,7 @@ export default {
         isAuth(state) {
             return isValidToken(state.user.accessToken);
         },
+
         userEmail (state) {
             return state.user.email;
         },

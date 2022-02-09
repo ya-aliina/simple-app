@@ -2,13 +2,8 @@
     <div class="wrapper">
         <Header/>
         <Main/>
-<!--        <Main v-if="$store.getters['user/isAuth']"/>-->
-<!--        <MainAuth v-else />-->
         <Footer/>
     </div>
-<!--    <div v-else>-->
-<!--        <MainAuth/>-->
-<!--    </div>-->
 </template>
 
 <script>
