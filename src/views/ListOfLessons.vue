@@ -169,11 +169,11 @@ export default {
         },
         openEditLesson(id, title) {
             this.id = id;
+            this.lessonTitleNew = title;
             this.addLessonModal = 'false';
             this.editLessonModal = 'true';
             this.deleteLessonModal = 'false';
             this.showDialog();
-            this.lessonTitleNew = title;
         },
         openDeleteLesson(id) {
             this.id = id;
@@ -194,8 +194,8 @@ export default {
         },
         doUpdate(id) {
             this.$store.dispatch("lessons/updateLesson", {
-                title: this.lessonTitle,
                 id,
+                title: this.lessonTitleNew,
                 courseId: this.courseId,
             })
             this.hideDialog();

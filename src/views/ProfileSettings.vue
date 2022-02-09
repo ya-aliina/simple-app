@@ -63,14 +63,13 @@
 <script>
 import Cover from "../components/Cover";
 import toggleMixin from "@/mixins/toggleMixin";
-import {getAuth} from "firebase/auth";
+import {getAuth, updatePassword} from "firebase/auth";
 
 export default {
     name: "ProfileSettings",
     components: {
         Cover,
     },
-
     mixins: [toggleMixin],
     data() {
         return {
@@ -113,10 +112,9 @@ export default {
             const newPassword = this.newPassword;
 
             updatePassword(user, newPassword).then((status) => {
-                // Update successful.
+                return alert('Пароль изменен')
             }).catch((error) => {
-                // An error ocurred
-                // ...
+                return alert('Произошла ошибка при смене пароля')
             });
 
         }

@@ -5,7 +5,7 @@ import store from './store'
 import components from '@/components/ui';
 
 import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, updatePassword } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
 import { getDatabase, ref, onValue } from "firebase/database";
 
@@ -31,6 +31,7 @@ components.forEach(component => {
 });
 
 const auth = getAuth();
+const user = auth.currentUser;
 
 const db = getDatabase();
 

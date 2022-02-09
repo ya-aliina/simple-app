@@ -3,7 +3,7 @@
         <div class="container wrapper editBtnWrapper">
             <img v-if="lessonFormVisible === 'false'" @click="openEditor" src="../assets/edit.png" alt=""
                  class="editBtn">
-            <img v-if="lessonFormVisible === 'true'" @click="doUpdate" src="../assets/done.png" alt=""
+            <img v-if="lessonFormVisible === 'true'" @click="doUpdate(id)" src="../assets/done.png" alt=""
                  class="editBtn done_img">
         </div>
         <!--========================Блок с уроком start===========================-->
@@ -87,16 +87,17 @@ export default {
             this.lesson = lessonById(this.id)[0]
         },
         openEditor() {
+            this.id = this.$route.params.idLesson
             this.courseId = this.$route.params.id;
-            this.lessonTitle = this.lesson.content;
+            this.lessonTitle = this.lesson.title;
             this.lessonContent = this.lesson.content;
             this.lessonFormVisible = 'true'
             console.log(this.lessonContent)
         },
-        doUpdate() {
+        doUpdate(id) {
             this.$store.dispatch("lessons/updateLesson", {
                 courseId: this.courseId,
-                id: this.id,
+                id,
                 title: this.lessonTitle,
                 content: this.lessonContent,
             });
