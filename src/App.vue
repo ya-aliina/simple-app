@@ -1,8 +1,9 @@
 <template>
     <div class="wrapper">
         <Header/>
-        <Main v-if="$store.getters['user/isAuth']"/>
-        <MainAuth v-else />
+        <Main/>
+<!--        <Main v-if="$store.getters['user/isAuth']"/>-->
+<!--        <MainAuth v-else />-->
         <Footer/>
     </div>
 <!--    <div v-else>-->

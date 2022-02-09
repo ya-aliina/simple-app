@@ -6,55 +6,125 @@ import MyEvents from "@/views/MyEvents";
 import Messages from "@/views/Messages";
 import Notifications from "@/views/Notifications";
 import ProfileSettings from "@/views/ProfileSettings";
-import CourseForm from "@/views/ListOfLessons";
+import ListOfLessons from "@/views/ListOfLessons";
 import LessonForm from "@/views/Lesson";
+import MainAuth from "@/views/MainAuth";
+import store from '@/store'
 
 const routes = [
+  {
+    path: '/authorization',
+    name: 'MainAuth',
+    component: MainAuth
+  },
   {
     path: '/',
     name: 'MainPage',
     component: MainPage,
+    beforeEnter (to, from, next) {
+      if (store.getters['user/isAuth']) {
+        next();
+      } else {
+        next('/authorization');
+      }
+    }
   },
   {
     path: '/:id',
-    name: 'CourseForm',
-    component: CourseForm,
+    name: 'ListOfLessons',
+    component: ListOfLessons,
+    beforeEnter (to, from, next) {
+      if (store.getters['user/isAuth']) {
+        next();
+      } else {
+        next('/authorization');
+      }
+    }
   },
   {
     path: '/:id/:idLesson',
     name: 'lessonForm',
     component: LessonForm,
+    beforeEnter (to, from, next) {
+      if (store.getters['user/isAuth']) {
+        next();
+      } else {
+        next('/authorization');
+      }
+    }
   },
   {
     path: '/add_lesson',
     name: 'AddLesson',
-    component: AddLesson
+    component: AddLesson,
+    beforeEnter (to, from, next) {
+      if (store.getters['user/isAuth']) {
+        next();
+      } else {
+        next('/authorization');
+      }
+    }
   },
   {
     path: '/knowledge_base',
     name: 'KnowledgeBase',
-    component: KnowledgeBase
+    component: KnowledgeBase,
+    beforeEnter (to, from, next) {
+      if (store.getters['user/isAuth']) {
+        next();
+      } else {
+        next('/authorization');
+      }
+    }
   },
   {
     path: '/my_events',
     name: 'MyEvents',
-    component: MyEvents
+    component: MyEvents,
+    beforeEnter (to, from, next) {
+      if (store.getters['user/isAuth']) {
+        next();
+      } else {
+        next('/authorization');
+      }
+    }
   },
   {
     path: '/messages',
     name: 'Messages',
-    component: Messages
+    component: Messages,
+    beforeEnter (to, from, next) {
+      if (store.getters['user/isAuth']) {
+        next();
+      } else {
+        next('/authorization');
+      }
+    }
   },
   {
     path: '/notifications',
     name: 'notifications',
-    component: Notifications
+    component: Notifications,
+    beforeEnter (to, from, next) {
+      if (store.getters['user/isAuth']) {
+        next();
+      } else {
+        next('/authorization');
+      }
+    }
   },
 
   {
     path: '/profile_settings',
     name: 'ProfileSettings',
-    component: ProfileSettings
+    component: ProfileSettings,
+    beforeEnter (to, from, next) {
+      if (store.getters['user/isAuth']) {
+        next();
+      } else {
+        next('/authorization');
+      }
+    }
   },
 ]
 

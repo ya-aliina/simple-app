@@ -121,7 +121,7 @@ export default {
             const provider = new GoogleAuthProvider();
             signInWithPopup(getAuth(), provider)
                 .then((status) => {
-                    if (status === 'OK') {
+                    if (status) {
                         this.$router.push('/')
                     }
                 })

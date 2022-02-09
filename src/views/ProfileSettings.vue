@@ -89,6 +89,7 @@ export default {
     methods: {
         doLogout() {
             this.$store.dispatch('user/logout')
+            this.goTo('/authorization')
         },
         debug () {
             console.log(this.$store.getters['user/userPhoto'])
