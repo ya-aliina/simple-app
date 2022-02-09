@@ -11,16 +11,16 @@ export default {
         const db = getDatabase();
         set(ref(db, 'calendar/'+data.id), data);
     },
-    // updateLesson(context, data) {
-    //     const updates = {};
-    //     updates['lessons/' +  data.id] = data;
-    //     const db = getDatabase();
-    //     return update(ref(db), updates);
-    // },
-    // deleteLesson(context, id) {
-    //     const updates = {};
-    //     updates['lessons/' + id] = null;
-    //     const db = getDatabase();
-    //     return update(ref(db), updates);
-    // }
+    updateEvent(context, data) {
+        const updates = {};
+        updates['calendar/' +  data.id] = data;
+        const db = getDatabase();
+        return update(ref(db), updates);
+    },
+    deleteEvent(context, id) {
+        const updates = {};
+        updates['calendar/' + id] = null;
+        const db = getDatabase();
+        return update(ref(db), updates);
+    }
 }

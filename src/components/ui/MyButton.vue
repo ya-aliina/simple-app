@@ -26,6 +26,7 @@ export default {
 
 <style scoped>
 button {
+    margin-top: 20px;
     margin-left: 0 !important;
     margin-right: 0 !important;
 }

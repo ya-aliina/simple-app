@@ -68,6 +68,6 @@ export default {
 .my_input_wrapper {
     display: flex;
 	padding-top: 20px;
-    background: white;
+    /*background: white;*/
 }
 </style>
