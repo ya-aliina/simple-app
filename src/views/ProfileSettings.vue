@@ -3,12 +3,12 @@
         <cover/>
         <div class="avatar_wrapper">
             <img :src="getUserPhoto()" class="avatar" alt="">
-            <div class="user_login">{{$store.getters['user/userEmail']}}</div>
+            <div class="user_login">{{ $store.getters['user/userEmail'] }}</div>
         </div>
         <div class="container">
             <div class="form ">
                 <div class="title">Настройки аккаунта</div>
-                <my-input-for-settings type="text" id="name" v-model="name" >
+                <my-input-for-settings type="text" id="name" v-model="name">
                     Имя:
                 </my-input-for-settings>
                 <my-input-for-settings type="text" id="surname" v-model="surname">
@@ -25,18 +25,27 @@
                 </my-input-for-settings>
                 <div class="d-flex wrap">
                     <div class="text">Пол</div>
-                    <my-radio :options="radioOptions" v-model:selected="answerRadio" />
+                    <my-radio :options="radioOptions" v-model:selected="answerRadio"/>
                 </div>
                 <div class="d-flex">
                     <div class="text">На Simple вы:</div>
                     <my-select :options="selectOptions" v-model:selected="answerSelect"/>
                 </div>
                 <my-checkbox v-model="mailNotifications" label="Получать уведомления на почту"/>
+                <div v-if="this.googleAccount === 'false'" class="new_password">
+                    <div class="title">Изменить пароль</div>
+                    <my-input-for-settings type="password" id="newPassword" v-model="newPassword">
+                        Введите новый пароль:
+                    </my-input-for-settings>
+                    <my-input-for-settings type="password" id="newPasswordCopy" v-model="newPasswordCopy">
+                        Повторите пароль:
+                    </my-input-for-settings>
+                </div>
                 <div class="button_wrapper even_level">
-                    <my-button class="btn-primary">
+                    <my-button @click="checkPasswordsAndUpdate(newPassword, newPasswordCopy)" class="btn-primary">
                         Сохранить
                     </my-button>
-                    <button @click="showDialog" type="button" class="btn btn-outline-primary" >
+                    <button @click="showDialog" type="button" class="btn btn-outline-primary">
                         Выйти
                     </button>
                 </div>
@@ -74,6 +83,7 @@ export default {
             patronymic: '',
             city: '',
             about: '',
+            googleAccount: 'true',
             currentPassword: '',
             newPassword: '',
             newPasswordCopy: '',
@@ -96,13 +106,36 @@ export default {
             this.$store.dispatch('user/logout')
             this.goTo('/authorization')
         },
-        getUserPhoto () {
+        getUserPhoto() {
             if (this.$store.getters['user/userPhoto'] == null) {
                 return require('../assets/avatar.svg')
             } else {
                 return this.$store.getters['user/userPhoto']
             }
         },
+        checkPasswordsAndUpdate(password, passwordCopy) {
+            if (password === passwordCopy) {
+                this.changePassword(password)
+            } else {
+                alert('Пароли не совпадают. Попробуйте еще')
+            }
+        },
+        changePassword(password) {
+            const auth = getAuth();
+            const user = auth.currentUser;
+            console.log(user)
+            const newPassword = password;
+            updatePassword(user, newPassword).then(() => {
+                alert('Пароль успешно изменен')
+            }).catch((error) => {
+                alert('Произошла ошибка при смене пароля')
+            });
+        }
+    },
+    created() {
+        if (this.$store.getters['user/userPhoto'] == null) {
+            return this.googleAccount = 'false'
+        }
     }
 }
 </script>
@@ -119,6 +152,7 @@ export default {
     align-items: center;
     margin-top: -75px;
 }
+
 .user_login {
     font-size: 22px;
     font-weight: 600;
@@ -145,12 +179,13 @@ export default {
 .container {
     max-width: 550px !important;
     display: flex;
-   justify-content: center;
+    justify-content: center;
 }
 
 .form {
     width: 100%;
 }
+
 .close_modal {
     margin-left: 30px;
 
@@ -166,10 +201,12 @@ export default {
 .even_level {
     margin-right: 15px;
 }
+
 .text {
     margin-right: 20px;
     width: 150px;
 }
+
 .wrap {
     margin-top: 20px;
 }
