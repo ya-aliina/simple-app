@@ -339,10 +339,9 @@ export default {
 /deep/ .vc-day-content {
     position: unset;
 }
-
-
-
-
+/deep/ .vc-day {
+    z-index: 0;
+}
 </style>
 
 

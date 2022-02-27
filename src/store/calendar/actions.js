@@ -1,4 +1,5 @@
-import { getDatabase, ref, set, update, child } from "firebase/database";
+
+import {getDatabase, ref, set, update, child} from "firebase/database";
 
 function generateId() {
     let id = Date.now()
@@ -13,7 +14,7 @@ export default {
     },
     updateEvent(context, data) {
         const updates = {};
-        updates['calendar/' +  data.id] = data;
+        updates['calendar/' + data.id] = data;
         const db = getDatabase();
         return update(ref(db), updates);
     },

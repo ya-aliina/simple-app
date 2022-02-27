@@ -8,6 +8,8 @@ import MyTextarea from "@/components/ui/MyTextarea";
 import MyButtonAuth from "@/components/ui/MyButtonAuth";
 import MyInputForSettings from "@/components/ui/MyInputForSettings";
 import MyDatePicker from "@/components/ui/MyDatePicker";
+import GreenCheckbox from "@/components/ui/GreenCheckbox";
+import GreenRadio from "@/components/ui/GreenRadio";
 
 export default [
 	MyRadio,
@@ -19,6 +21,8 @@ export default [
 	MyTextarea,
 	MyButtonAuth,
 	MyInputForSettings,
-	MyDatePicker
+	MyDatePicker,
+	GreenCheckbox,
+	GreenRadio
 ]
 
